@@ -28,21 +28,17 @@ RUN apk add --no-cache --virtual .build-deps g++ libstdc++ make swig \
  && mv "$buildDir/gdal-${GDAL_VERSION}/swig/java/gdal.jar" /usr/share/gdal.jar \
  && apk del .build-deps \
  && rm -rf "$buildDir" \
- && wget http://data.boundlessgeo.com/suite/jai/jai-1_1_3-lib-linux-amd64-jdk.bin "$downloadDir/jai-1_1_3-lib-linux-amd64-jdk.bin" \
+ && wget http://data.boundlessgeo.com/suite/jai/jai-1_1_3-lib-linux-amd64-jdk.bin -O "$downloadDir/jai-1_1_3-lib-linux-amd64-jdk.bin" \
  && cd "$JAVA_HOME" \
  && echo "yes" | sh "$downloadDir/jai-1_1_3-lib-linux-amd64-jdk.bin" \
- && wget http://data.opengeo.org/suite/jai/jai_imageio-1_1-lib-linux-amd64-jdk.bin && \
-    echo "yes" | sh jai_imageio-1_1-lib-linux-amd64-jdk.bin && \
-    rm jai_imageio-1_1-lib-linux-amd64-jdk.bin
-
-# Get GeoServer
-RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-bin.zip -O ~/geoserver.zip && \
-    unzip ~/geoserver.zip -d /opt && mv -v /opt/geoserver* /opt/geoserver && \
-    rm ~/geoserver.zip
-
-# Get OGR plugin
-RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip -O ~/geoserver-ogr-plugin.zip &&\
-    unzip -o ~/geoserver-ogr-plugin.zip -d /opt/geoserver/webapps/geoserver/WEB-INF/lib/ && \
+ && wget http://data.opengeo.org/suite/jai/jai_imageio-1_1-lib-linux-amd64-jdk.bin -O "$downloadDir/jai_imageio-1_1-lib-linux-amd64-jdk.bin" \
+ && echo "yes" | sh "$downloadDir/jai_imageio-1_1-lib-linux-amd64-jdk.bin" \
+ 
+ && wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip -O "$downloadDir/geoserver.zip" \
+ && unzip "$downloadDir/geoserver.zip" geoserver.war -d /usr/local/tomcat/webapps \
+ && catalina.sh run
+ && wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip -O "$downloadDir/geoserver-ogr-plugin.zip" \
+ && unzip "$downloadDir/geoserver-ogr-plugin.zip" o ~/geoserver-ogr-plugin.zip -d /opt/geoserver/webapps/geoserver/WEB-INF/lib/ && \
     rm ~/geoserver-ogr-plugin.zip
 
 # Get GDAL plugin
