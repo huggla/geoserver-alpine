@@ -4,7 +4,7 @@ USER root
 
 ENV GEOSERVER_VERSION="2.8.5" \
     GDAL_VERSION="1.11.4" \
-    ANT_VERSION="1.9.7" \
+    ANT_VERSION="1.9.11" \
 #    LD_LIBRARY_PATH="/usr/local/lib/" \
     _POSIX2_VERSION="199209" \
     JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
@@ -19,7 +19,7 @@ RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
  && ./configure  --with-java=$JAVA_HOME \
  && make \
  && make install \
- && wget http://mirrors.ae-online.de/apache/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz -O "$downloadDir/ant.tar.gz" \
+ && wget https://www.apache.org/dist/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz -O "$downloadDir/ant.tar.gz" \
  && tar xzf "$downloadDir/ant.tar.gz" -C "$downloadDir" \
  && mv "$downloadDir/apache-ant-${ANT_VERSION}/bin/ant" /usr/local/bin/ant \
  && cd "$buildDir/gdal-${GDAL_VERSION}/swig/java" \
