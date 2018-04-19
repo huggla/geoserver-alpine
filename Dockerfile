@@ -8,7 +8,8 @@ ENV GEOSERVER_VERSION="2.8.5" \
     ANT_HOME="/usr/local/ant" \
     LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/" \
     _POSIX2_VERSION="199209" \
-    JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
+    JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk" \
+    PATH="$PATH:/usr/local/ant/bin"
 
 RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
  && apk add --no-cache libstdc++ \
@@ -24,11 +25,8 @@ RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
  && tar xzf "$downloadDir/ant.tar.gz" -C "$downloadDir" \
  && mkdir /usr/local/ant \
  && mv "$downloadDir/apache-ant-${ANT_VERSION}/bin" /usr/local/ant/bin \
- && mv "$downloadDir/apache-ant-${ANT_VERSION}/lib" /usr/local/ant/lib
- 
- ENV PATH="$PATH:/usr/local/ant/bin"
- 
- RUN cd "$buildDir/gdal-${GDAL_VERSION}/swig/java" \
+ && mv "$downloadDir/apache-ant-${ANT_VERSION}/lib" /usr/local/ant/lib \
+ && cd "$buildDir/gdal-${GDAL_VERSION}/swig/java" \
  && sed -i '/JAVA_HOME =/d' java.opt \
  && make \
  && make install \
