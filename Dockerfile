@@ -23,9 +23,12 @@ RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
  && wget https://www.apache.org/dist/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz -O "$downloadDir/ant.tar.gz" \
  && tar xzf "$downloadDir/ant.tar.gz" -C "$downloadDir" \
  && mkdir /usr/local/ant \
- && mv "$downloadDir/apache-ant-${ANT_VERSION}/bin" /usr/local/ant/ \
- && mv "$downloadDir/apache-ant-${ANT_VERSION}/lib" /usr/local/ant/ \
- && cd "$buildDir/gdal-${GDAL_VERSION}/swig/java" \
+ && mv "$downloadDir/apache-ant-${ANT_VERSION}/bin" /usr/local/ant/bin \
+ && mv "$downloadDir/apache-ant-${ANT_VERSION}/lib" /usr/local/ant/lib
+ 
+ ENV PATH="$PATH:/usr/local/ant/bin"
+ 
+ RUN cd "$buildDir/gdal-${GDAL_VERSION}/swig/java" \
  && sed -i '/JAVA_HOME =/d' java.opt \
  && make \
  && make install \
