@@ -1,4 +1,4 @@
-FROM huggla/tomcat-geo
+FROM huggla/tomcat-alpine
 
 USER root
 
