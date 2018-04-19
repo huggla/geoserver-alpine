@@ -6,7 +6,7 @@ ENV GEOSERVER_VERSION="2.8.5" \
     GDAL_VERSION="1.11.4" \
     ANT_VERSION="1.9.11" \
     ANT_HOME="/usr/local/ant" \
-#    LD_LIBRARY_PATH="/usr/local/lib/" \
+    LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/" \
     _POSIX2_VERSION="199209" \
     JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
 
