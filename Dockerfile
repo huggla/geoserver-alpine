@@ -1,10 +1,11 @@
 FROM huggla/tomcat-alpine
 
+USER root
+
 ENV GEOSERVER_VERSION="2.8.5" \
     GDAL_VERSION="1.11.4" \
     ANT_VERSION="1.9.7" \
 #    LD_LIBRARY_PATH="/usr/local/lib/" \
-    GEOSERVER_HOME="/opt/geoserver" \
     _POSIX2_VERSION="199209"
 
 RUN apk add --no-cache --virtual .build-deps g++ libstdc++ make swig \
@@ -33,23 +34,14 @@ RUN apk add --no-cache --virtual .build-deps g++ libstdc++ make swig \
  && echo "yes" | sh "$downloadDir/jai-1_1_3-lib-linux-amd64-jdk.bin" \
  && wget http://data.opengeo.org/suite/jai/jai_imageio-1_1-lib-linux-amd64-jdk.bin -O "$downloadDir/jai_imageio-1_1-lib-linux-amd64-jdk.bin" \
  && echo "yes" | sh "$downloadDir/jai_imageio-1_1-lib-linux-amd64-jdk.bin" \
- 
  && wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip -O "$downloadDir/geoserver.zip" \
  && unzip "$downloadDir/geoserver.zip" geoserver.war -d /usr/local/tomcat/webapps \
- && catalina.sh run
+ && catalina.sh configtest \
  && wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip -O "$downloadDir/geoserver-ogr-plugin.zip" \
- && unzip "$downloadDir/geoserver-ogr-plugin.zip" o ~/geoserver-ogr-plugin.zip -d /opt/geoserver/webapps/geoserver/WEB-INF/lib/ && \
-    rm ~/geoserver-ogr-plugin.zip
+ && unzip -o "$downloadDir/geoserver-ogr-plugin.zip" -d /opt/geoserver/webapps/geoserver/WEB-INF/lib \
+ && wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip -O "$downloadDir/geoserver-gdal-plugin.zip" \
+ && unzip -o "$downloadDir/geoserver-gdal-plugin.zip" -d /opt/geoserver/webapps/geoserver/WEB-INF/lib \
+ && rm -rf /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-1.9.2.jar \
+ && cp /usr/share/gdal.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/gdal.jar
 
-# Get GDAL plugin
-RUN wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip -O ~/geoserver-gdal-plugin.zip &&\
-    unzip -o ~/geoserver-gdal-plugin.zip -d /opt/geoserver/webapps/geoserver/WEB-INF/lib/ && \
-    rm ~/geoserver-gdal-plugin.zip
-
-# Replace GDAL Java bindings
-RUN rm -rf $GEOSERVER_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-1.9.2.jar
-RUN cp /usr/share/gdal.jar $GEOSERVER_HOME/webapps/geoserver/WEB-INF/lib/gdal.jar
-
-# Expose GeoServer's default port
-EXPOSE 8080
-CMD ["/opt/geoserver/bin/startup.sh"]
+USER sudoer
