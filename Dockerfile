@@ -1,4 +1,4 @@
-FROM huggla/tomcat-alpine
+FROM huggla/tomcat-geo
 
 USER root
 
@@ -42,6 +42,7 @@ RUN apk add --no-cache --virtual .build-deps g++ libstdc++ make swig \
  && wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip -O "$downloadDir/geoserver-gdal-plugin.zip" \
  && unzip -o "$downloadDir/geoserver-gdal-plugin.zip" -d /opt/geoserver/webapps/geoserver/WEB-INF/lib \
  && rm -rf /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-1.9.2.jar \
- && cp /usr/share/gdal.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/gdal.jar
+ && cp /usr/share/gdal.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/gdal.jar \
+ && rm -rf "$downloadDir"
 
 USER sudoer
