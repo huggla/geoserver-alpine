@@ -8,7 +8,7 @@ ENV GEOSERVER_VERSION="2.8.5" \
 #    LD_LIBRARY_PATH="/usr/local/lib/" \
     _POSIX2_VERSION="199209"
 
-RUN apk add --no-cache --virtual .build-deps g++ make swig \
+RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
  && apk add --no-cache libstdc++ \
  && downloadDir="$(mktemp -d)" \
  && buildDir="$(mktemp -d)" \
