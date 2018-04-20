@@ -2,8 +2,9 @@
 
 setenvironmentvars(){
    IFS_bak=$IFS
-   local IFS="$(echo -e '\n\b')"
-   local vars="$(echo $1 | /usr/bin/awk -v section=$1 -F ' ' '$1==section{s=""; for (i=2; i < NF; i++) s = s $i " "; print s $NF}')"
+   local IFS="$(echo -en '\n\b')"
+   local vars="$(echo $1 | /usr/bin/awk -v section=$1 -F '#' '$1==section{s=""; for (i=2; i < NF; i++) s = s $i "#"; print s $NF}')"
+   local IFS="$(echo -en '\n\b')"
    for var in $vars
    do
       $var
