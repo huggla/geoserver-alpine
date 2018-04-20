@@ -11,7 +11,7 @@ ENV GEOSERVER_VERSION="2.8.5" \
     JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk" \
     PATH="$PATH:/usr/local/ant/bin"
 
-RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
+RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR openjdk8-jre-base \
  && apk add --no-cache libstdc++ \
  && downloadDir="$(mktemp -d)" \
  && buildDir="$(mktemp -d)" \
@@ -35,7 +35,7 @@ RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
  && rm -rf "$buildDir" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip -O "$downloadDir/geoserver.zip" \
  && unzip "$downloadDir/geoserver.zip" geoserver.war -d "$CATALINA_HOME/webapps" \
- && JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk/jre" /usr/lib/jvm/java-1.8-openjdk/jre/bin/jar xvf "$CATALINA_HOME/webapps/geoserver.war" -C "$CATALINA_HOME/webapps" \
+ && /usr/lib/jvm/java-1.8-openjdk/jre/bin/jar xvf "$CATALINA_HOME/webapps/geoserver.war" -C "$CATALINA_HOME/webapps" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip -O "$downloadDir/geoserver-ogr-plugin.zip" \
  && unzip -o "$downloadDir/geoserver-ogr-plugin.zip" -d "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip -O "$downloadDir/geoserver-gdal-plugin.zip" \
