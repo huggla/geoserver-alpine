@@ -30,12 +30,12 @@ RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
  && sed -i '/JAVA_HOME =/d' java.opt \
  && make \
  && make install \
- && mv *.so /usr/local/lib/ \
+ && mv *.s /usr/local/lib/ \
  && mv "$buildDir/gdal-${GDAL_VERSION}/swig/java/gdal.jar" /usr/share/gdal.jar \
  && rm -rf "$buildDir" \
  && wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip -O "$downloadDir/geoserver.zip" \
  && unzip "$downloadDir/geoserver.zip" geoserver.war -d /usr/local/tomcat/webapps \
- && catalina.sh configtest \
+ && JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk/jre" catalina.sh configtest \
  && wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip -O "$downloadDir/geoserver-ogr-plugin.zip" \
  && unzip -o "$downloadDir/geoserver-ogr-plugin.zip" -d /opt/geoserver/webapps/geoserver/WEB-INF/lib \
  && wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip -O "$downloadDir/geoserver-gdal-plugin.zip" \
