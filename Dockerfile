@@ -32,7 +32,6 @@ RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
  && make install \
  && mv *.so /usr/local/lib/ \
  && mv "$buildDir/gdal-${GDAL_VERSION}/swig/java/gdal.jar" /usr/share/gdal.jar \
- && apk del .build-deps \
  && rm -rf "$buildDir" \
  && wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip -O "$downloadDir/geoserver.zip" \
  && unzip "$downloadDir/geoserver.zip" geoserver.war -d /usr/local/tomcat/webapps \
@@ -43,6 +42,7 @@ RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
  && unzip -o "$downloadDir/geoserver-gdal-plugin.zip" -d /opt/geoserver/webapps/geoserver/WEB-INF/lib \
  && rm -rf /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-1.9.2.jar \
  && cp /usr/share/gdal.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/gdal.jar \
+ && apk del .build-deps \
  && rm -rf "$downloadDir"
 
 ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk/jre"
