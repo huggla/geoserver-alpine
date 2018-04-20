@@ -34,14 +34,14 @@ RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
  && mv "$buildDir/gdal-${GDAL_VERSION}/swig/java/gdal.jar" /usr/share/gdal.jar \
  && rm -rf "$buildDir" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip -O "$downloadDir/geoserver.zip" \
- && unzip "$downloadDir/geoserver.zip" geoserver.war -d /usr/local/tomcat/webapps \
- && JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk/jre" catalina.sh configtest \
+ && unzip "$downloadDir/geoserver.zip" geoserver.war -d "$CATALINA_HOME/webapps" \
+ && /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf "$CATALINA_HOME/webapps/geoserver.war" -C "$CATALINA_HOME/webapps" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip -O "$downloadDir/geoserver-ogr-plugin.zip" \
- && unzip -o "$downloadDir/geoserver-ogr-plugin.zip" -d /opt/geoserver/webapps/geoserver/WEB-INF/lib \
+ && unzip -o "$downloadDir/geoserver-ogr-plugin.zip" -d "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip -O "$downloadDir/geoserver-gdal-plugin.zip" \
- && unzip -o "$downloadDir/geoserver-gdal-plugin.zip" -d /opt/geoserver/webapps/geoserver/WEB-INF/lib \
- && rm -rf /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-1.9.2.jar \
- && cp /usr/share/gdal.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/gdal.jar \
+ && unzip -o "$downloadDir/geoserver-gdal-plugin.zip" -d "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib" \
+ && rm -rf "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-1.9.2.jar" \
+ && cp /usr/share/gdal.jar "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/gdal.jar" \
  && apk del .build-deps \
  && rm -rf "$downloadDir"
 
