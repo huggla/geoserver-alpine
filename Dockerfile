@@ -30,7 +30,7 @@ RUN apk add --no-cache --virtual .build-deps g++ make swig openjdk$JAVA_MAJOR \
  && sed -i '/JAVA_HOME =/d' java.opt \
  && make \
  && make install \
- && mv *.s /usr/local/lib/ \
+ && mv *.so /usr/local/lib/ \
  && mv "$buildDir/gdal-${GDAL_VERSION}/swig/java/gdal.jar" /usr/share/gdal.jar \
  && rm -rf "$buildDir" \
  && wget -c http://downloads.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip -O "$downloadDir/geoserver.zip" \
