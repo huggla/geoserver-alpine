@@ -39,7 +39,7 @@ RUN apk del openjdk8-jre \
  && cp /usr/lib/jvm/java-1.8-openjdk/lib/amd64/jli/libjli.so /usr/lib/jvm/java-1.8-openjdk/bin/ \
  && cp /usr/lib/jvm/java-1.8-openjdk/lib/amd64/jli/libjli.so /usr/lib/jvm/java-1.8-openjdk/lib/ \
  && cp /usr/lib/jvm/java-1.8-openjdk/lib/amd64/jli/libjli.so /usr/local/lib/ \
- && /usr/lib/jvm/java-1.8-openjdk/bin/jar -xvf "$CATALINA_HOME/webapps/geoserver.war" -C "$CATALINA_HOME/webapps" \
+ && /usr/lib/jvm/java-1.8-openjdk/bin/jar x -vf "$CATALINA_HOME/webapps/geoserver.war" -C "$CATALINA_HOME/webapps" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip -O "$downloadDir/geoserver-ogr-plugin.zip" \
  && unzip -o "$downloadDir/geoserver-ogr-plugin.zip" -d "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip -O "$downloadDir/geoserver-gdal-plugin.zip" \
