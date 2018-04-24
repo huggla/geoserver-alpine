@@ -1,18 +1,20 @@
-FROM huggla/tomcat-alpine
+FROM anapsix/alpine-java:9_jdk as jdk
+FROM huggla/tomcat-oracle
 
 USER root
+
+COPY --from=jdk /opt /opt
 
 ENV GEOSERVER_VERSION="2.8.5" \
     GDAL_VERSION="1.11.4" \
     ANT_VERSION="1.9.11" \
     ANT_HOME="/usr/local/ant" \
-    LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/:/usr/lib/jvm/java-1.8-openjdk/lib/amd64/jli:/usr/lib/jvm/java-1.8-openjdk/lib" \
+    LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/:/opt/jdk/lib" \
     _POSIX2_VERSION="199209" \
-    JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk" \
-    PATH="$PATH:/usr/local/ant/bin"
+    JAVA_HOME="/opt/jdk" \
+    PATH="$PATH:/opt/jdk/bin:/usr/local/ant/bin"
 
-RUN apk del openjdk8-jre \
- && apk add --no-cache --virtual .build-deps g++ make swig openjdk8-jre-base openjdk8 \
+RUN apk add --no-cache --virtual .build-deps g++ make swig \
  && apk add --no-cache libstdc++ \
  && downloadDir="$(mktemp -d)" \
  && buildDir="$(mktemp -d)" \
@@ -36,13 +38,10 @@ RUN apk del openjdk8-jre \
  && rm -rf "$buildDir" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip -O "$downloadDir/geoserver.zip" \
  && unzip "$downloadDir/geoserver.zip" geoserver.war -d "$CATALINA_HOME/webapps" \
- && cp /usr/lib/jvm/java-1.8-openjdk/lib/amd64/jli/libjli.so /usr/lib/jvm/java-1.8-openjdk/bin/ \
- && cp /usr/lib/jvm/java-1.8-openjdk/lib/amd64/jli/libjli.so /usr/lib/jvm/java-1.8-openjdk/lib/ \
- && cp /usr/lib/jvm/java-1.8-openjdk/lib/amd64/jli/libjli.so /usr/local/lib/ \
  && cd "$CATALINA_HOME/webapps" \
  && mkdir geoserver \
  && cd geoserver \
- && /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf "$CATALINA_HOME/webapps/geoserver.war" \
+ && jar xvf "$CATALINA_HOME/webapps/geoserver.war" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip -O "$downloadDir/geoserver-ogr-plugin.zip" \
  && unzip -o "$downloadDir/geoserver-ogr-plugin.zip" -d "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip -O "$downloadDir/geoserver-gdal-plugin.zip" \
@@ -51,7 +50,5 @@ RUN apk del openjdk8-jre \
  && cp /usr/share/gdal.jar "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/gdal.jar" \
  && apk del .build-deps \
  && rm -rf "$downloadDir"
-
-ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk/jre"
 
 USER sudoer
