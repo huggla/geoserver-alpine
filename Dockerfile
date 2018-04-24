@@ -5,9 +5,9 @@ USER root
 
 COPY --from=jdk /opt /opt
 
-ENV GEOSERVER_VERSION="2.8.5" \
-    GDAL_VERSION="1.11.4" \
-    ANT_VERSION="1.9.11" \
+ENV GEOSERVER_VERSION="2.13.0" \
+    GDAL_VERSION="2.2.4" \
+    ANT_VERSION="1.10.3" \
     ANT_HOME="/usr/local/ant" \
     LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib/:/opt/jdk/lib" \
     _POSIX2_VERSION="199209" \
@@ -46,7 +46,7 @@ RUN apk add --no-cache --virtual .build-deps g++ make swig \
  && unzip -o "$downloadDir/geoserver-ogr-plugin.zip" -d "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib" \
  && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip -O "$downloadDir/geoserver-gdal-plugin.zip" \
  && unzip -o "$downloadDir/geoserver-gdal-plugin.zip" -d "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib" \
- && rm -rf "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-1.9.2.jar" \
+ && rm -rf $CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar \
  && cp /usr/share/gdal.jar "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/gdal.jar" \
  && apk del .build-deps \
  && rm -rf "$downloadDir"
