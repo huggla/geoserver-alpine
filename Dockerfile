@@ -14,7 +14,7 @@ ENV GEOSERVER_VERSION="2.13.0" \
     JAVA_HOME="/opt/jdk" \
     PATH="$PATH:/opt/jdk/bin:/usr/local/ant/bin"
 
-RUN apk add --no-cache --virtual .build-deps g++ make swig \
+RUN apk add --no-cache --virtual .build-deps g++ make swig linux-vanilla-dev \
  && apk add --no-cache libstdc++ \
  && downloadDir="$(mktemp -d)" \
  && buildDir="$(mktemp -d)" \
