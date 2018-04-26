@@ -4,6 +4,7 @@ FROM huggla/tomcat-oracle
 USER root
 
 COPY --from=gdal /opt/gdal /opt/gdal
+COPY --from=gdal /usr/share/gdal.jar /usr/share/gdal.jar
 
 ENV GEOSERVER_VERSION="2.13.0"
 
