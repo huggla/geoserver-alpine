@@ -1,5 +1,5 @@
 ARG TAG="20190220"
-ARG BASEIMAGE="huggla/tomcat-alpine:$TAG"
+ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 ARG MAKEDIRS="\$CATALINA_HOME/webapps/geoserver"
 ARG RUNDEPS="gdal"
 ARG GEOSERVER_VERSION="2.13.0"
