@@ -1,9 +1,11 @@
 ARG TAG="20190220"
 ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 ARG MAKEDIRS="\$CATALINA_HOME/webapps/geoserver"
+ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
 ARG RUNDEPS="gdal"
 ARG GEOSERVER_VERSION="2.13.0"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip"
+ARG CATALINA_HOME="/usr/local/tomcat"
 ARG BUILDCMDS=\
 "   cp -a geoserver.war /buildfs/\$CATALINA_HOME/webapps/ "\
 "&& cd /buildfs/\$CATALINA_HOME/webapps/geoserver "\
