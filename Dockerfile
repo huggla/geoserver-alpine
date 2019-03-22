@@ -7,7 +7,8 @@ ARG RUNDEPS="gdal"
 ARG GEOSERVER_VERSION="2.13.0"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip"
 ARG BUILDCMDS=\
-"   cp -a geoserver.war /buildfs$CATALINA_HOME/webapps/ "\
+"   ls -la "\
+" &&  cp -a geoserver.war /buildfs$CATALINA_HOME/webapps/ "\
 "&& cd /buildfs$CATALINA_HOME/webapps/geoserver "\
 "&& jar xvf ../geoserver.war "\
 "&& cp -a /buildfs/*.jar WEB-INF/lib/"
