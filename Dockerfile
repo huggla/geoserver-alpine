@@ -6,10 +6,8 @@ ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
 ARG RUNDEPS="gdal"
 ARG GEOSERVER_VERSION="2.13.0"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip"
-ARG BUILDCMDS=\
-"   ls -la "
-#" &&  cp -a geoserver.war /imagefs$CATALINA_HOME/webapps/ "\
-#"&& cd /imagefs$CATALINA_HOME/webapps/geoserver "\
+#ARG BUILDCMDS=\
+#"   cd /imagefs$CATALINA_HOME/webapps/geoserver "\
 #"&& jar xvf \$buildDir/geoserver.war "\
 #"&& cp -a \$buildDir/*.jar WEB-INF/lib/"
 ARG REMOVEFILES="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar"
