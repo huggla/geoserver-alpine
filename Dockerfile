@@ -1,7 +1,9 @@
 ARG TAG="20190220"
-ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 ARG CATALINA_HOME="/usr/local/tomcat"
-ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver"
+ARG CONTENTIMAGE1="huggla/build-gdal"
+ARG CONTENTSOURCE1="/usr/share/gdal.jar"
+ARG CONTENTDESTINATION1="/buildfs$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/gdal.jar"
+ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
 ARG RUNDEPS="gdal"
 ARG BUILDDEPS="openjdk8"
@@ -74,6 +76,7 @@ ONBUILD USER root
 # && wget http://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip -O "$downloadDir/geoserver-gdal-plugin.zip" \
 # && unzip -o "$downloadDir/geoserver-gdal-plugin.zip" -d "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib" \
 # && rm -rf $CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar \
+
 # && cp /usr/share/gdal.jar "$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/gdal.jar" \
 # && wget http://data.boundlessgeo.com/suite/jai/jai-1_1_3-lib-linux-amd64-jdk.bin -O "$downloadDir/jai-1_1_3-lib-linux-amd64-jdk.bin"
 # && JAVA_HOME="/opt/jdk-full" \
