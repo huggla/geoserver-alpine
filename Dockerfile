@@ -13,7 +13,7 @@ ARG BUILDCMDS=\
 "   cd /imagefs$CATALINA_HOME/webapps/geoserver "\
 "&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/ "\
-"&& cd /imagefs/usr/local "\
+"&& cd /imagefs/usr/lib/jvm/java-1.8-openjdk/jre "\
 "&& echo 'yes' | sh \$downloadsDir/jai-1_1_3-lib-linux-amd64-jre.bin "\
 "&& echo 'yes' | sh \$downloadsDir/jai_imageio-1_1-lib-linux-amd64-jre.bin"
 
