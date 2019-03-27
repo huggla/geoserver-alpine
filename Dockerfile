@@ -15,7 +15,7 @@ ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOS
 ARG INITCMDS=\
 "   wget -P /tmp https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jre.bin "\
 "&& cd /buildfs/usr/local "\
-"&& echo 'yes' | sh /tmp/jai-1_1_3-lib-linux-amd64-jre.bin "\
+"&& echo 'yes' | sh /tmp/jai-1_1_3-lib-linux-amd64-jre.bin"
 ARG BUILDCMDS=\
 "   cd /imagefs$CATALINA_HOME/webapps/geoserver "\
 "&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
