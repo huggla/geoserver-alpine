@@ -1,22 +1,26 @@
 ARG TAG="20190220"
 ARG CATALINA_HOME="/usr/local/tomcat"
+ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 ARG CONTENTIMAGE1="huggla/build-gdal"
 ARG CONTENTSOURCE1="/usr/share/gdal.jar"
 ARG CONTENTDESTINATION1="/buildfs$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/gdal.jar"
-ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
+ARG CONTENTIMAGE2="$BASEIMAGE"
+ARG CONTENTSOURCE2="/usr/local"
+ARG CONTENTDESTINATION2="/buildfs/usr/local"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
 ARG RUNDEPS="gdal"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.13.0"
-ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jre.bin https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin"
+ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip"
+ARG INITCMDS=\
+"   wget -P /tmp https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jre.bin https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
+"&& cd /buildfs/usr/local "\
+"&& echo 'yes' | sh /tmp/jai-1_1_3-lib-linux-amd64-jre.bin "\
+"&& echo 'yes' | sh /tmp/jai_imageio-1_1-lib-linux-amd64-jre.bin"
 ARG BUILDCMDS=\
 "   cd /imagefs$CATALINA_HOME/webapps/geoserver "\
 "&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
-"&& cp -a \$downloadsDir/*.jar WEB-INF/lib/ "\
-"&& cd /imagefs/usr/lib/jvm/java-1.8-openjdk/jre "\
-"&& echo 'yes' | sh \$downloadsDir/jai-1_1_3-lib-linux-amd64-jre.bin "\
-"&& echo 'yes' | sh \$downloadsDir/jai_imageio-1_1-lib-linux-amd64-jre.bin"
-
+"&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
 ARG REMOVEFILES="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar"
 
 #--------Generic template (don't edit)--------
