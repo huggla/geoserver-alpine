@@ -10,7 +10,6 @@ ARG CONTENTDESTINATION2="/imagefs$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/gd
 ARG CONTENTIMAGE3="huggla/build-gdal"
 ARG CONTENTSOURCE3="/opt/gdal"
 ARG CONTENTDESTINATION3="/buildfs/opt/gdal"
-ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.13.0"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip"
