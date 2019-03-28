@@ -17,6 +17,10 @@ ARG INITCMDS=\
 "   wget -P /tmp https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jre.bin"
 #"&& cd /buildfs/usr/local "\
 #"&& echo 'yes' | sh /tmp/jai-1_1_3-lib-linux-amd64-jre.bin"
+#"&& rm -f /tmp/jai-1_1_3-lib-linux-amd64-jre.bin "\
+#"&& wget -P /tmp https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin"
+#"&& echo 'yes' | sh /tmp/jai_imageio-1_1-lib-linux-amd64-jre.bin"
+#"&& rm -f /tmp/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 #ARG BUILDCMDS=\
 #"   cd /imagefs$CATALINA_HOME/webapps/geoserver "\
 #"&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
