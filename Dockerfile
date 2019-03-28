@@ -14,12 +14,13 @@ ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.13.0"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip"
 ARG INITCMDS=\
-"   wget -P /tmp https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jre.bin"
-#"&& cd /buildfs/usr/local "\
-#"&& echo 'yes' | sh /tmp/jai-1_1_3-lib-linux-amd64-jre.bin"
-#"&& rm -f /tmp/jai-1_1_3-lib-linux-amd64-jre.bin "\
+"   wget https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jre.bin https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
+"&& cd /buildfs/usr/local "\
+"&& echo 'yes' | sh /buildfs/jai-1_1_3-lib-linux-amd64-jre.bin "\
+"&& echo 'yes' | sh /buildfs/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
+"&& rm -f /buildfs/jai-1_1_3-lib-linux-amd64-jre.bin /buildfs/jai_imageio-1_1-lib-linux-amd64-jre.bin"
 #"&& wget -P /tmp https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin"
-#"&& echo 'yes' | sh /tmp/jai_imageio-1_1-lib-linux-amd64-jre.bin"
+
 #"&& rm -f /tmp/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 #ARG BUILDCMDS=\
 #"   cd /imagefs$CATALINA_HOME/webapps/geoserver "\
