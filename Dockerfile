@@ -16,6 +16,7 @@ ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOS
 ARG INITCMDS=\
 "   wget https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jre.bin https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 "&& cd /buildfs/usr/local "\
+"&& CATALINA_HOME="/buildfs$CATALINA_HOME "\
 "&& echo 'yes' | sh /buildfs/jai-1_1_3-lib-linux-amd64-jre.bin "\
 "&& echo 'yes' | sh /buildfs/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 "&& rm -f /buildfs/jai-1_1_3-lib-linux-amd64-jre.bin /buildfs/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
