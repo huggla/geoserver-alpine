@@ -1,26 +1,19 @@
 ARG TAG="20190327"
 ARG CATALINA_HOME="/usr/local/tomcat"
 ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
-ARG CONTENTIMAGE1="$BASEIMAGE"
-ARG CONTENTSOURCE1="/usr/local"
-ARG CONTENTDESTINATION1="/buildfs/usr/local"
-ARG CONTENTIMAGE2="huggla/build-gdal"
-ARG CONTENTSOURCE2="/usr/share/gdal.jar"
-ARG CONTENTDESTINATION2="/imagefs$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/gdal.jar"
-ARG CONTENTIMAGE3="huggla/build-gdal"
-ARG CONTENTSOURCE3="/opt/gdal"
-ARG CONTENTDESTINATION3="/buildfs/opt/gdal"
+ARG CONTENTIMAGE1="huggla/build-gdal"
+ARG CONTENTSOURCE1="/gdal"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.13.0"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip"
 ARG INITCMDS=\
 "   wget https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jre.bin https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 "&& cd /buildfs/usr/local "\
-"&& CATALINA_HOME="/buildfs$CATALINA_HOME "\
+"&& CATALINA_HOME=/buildfs$CATALINA_HOME "\
 "&& echo 'yes' | sh /buildfs/jai-1_1_3-lib-linux-amd64-jre.bin "\
 "&& echo 'yes' | sh /buildfs/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 "&& rm -f /buildfs/jai-1_1_3-lib-linux-amd64-jre.bin /buildfs/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
-"&& ls -la /buildfs /imagefs"
+"&& ls -lar /buildfs /imagefs"
 #"&& wget -P /tmp https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin"
 
 #"&& rm -f /tmp/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
