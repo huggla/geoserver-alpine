@@ -1,6 +1,6 @@
 ARG TAG="20190327"
 ARG BUILDDEPS="openjdk8 build-base autoconf automake libtool sqlite sqlite-dev linux-headers patchelf swig"
-ARG GITCLONES="https://github.com/OSGeo/proj.4 https://github.com/OSGeo/gdal
+ARG GITCLONES="https://github.com/OSGeo/proj.4 https://github.com/OSGeo/gdal"
 ARG DESTDIR="/imagefs"
 ARG _POSIX2_VERSION="199209"
 ARG JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
