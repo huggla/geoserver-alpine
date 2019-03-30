@@ -1,1 +1,58 @@
-F
+ARG TAG="20190327"
+ARG BUILDDEPS="openjdk8 build-base autoconf automake libtool sqlite sqlite-dev linux-headers git patchelf swig"
+ARG INITCMDS=\
+"   wget https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jre.bin https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
+"&& cd /buildfs/usr/local "\
+"&& CATALINA_HOME=/buildfs$CATALINA_HOME "\
+"&& echo 'yes' | sh /buildfs/jai-1_1_3-lib-linux-amd64-jre.bin "\
+"&& echo 'yes' | sh /buildfs/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
+"&& rm -f /buildfs/jai-1_1_3-lib-linux-amd64-jre.bin /buildfs/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
+"&& ls -lar /buildfs /imagefs"
+#"&& wget -P /tmp https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin"
+
+#"&& rm -f /tmp/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
+#ARG BUILDCMDS=\
+#"   cd /imagefs$CATALINA_HOME/webapps/geoserver "\
+#"&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
+#"&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
+#ARG REMOVEFILES="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar"
+
+#--------Generic template (don't edit)--------
+FROM ${CONTENTIMAGE1:-scratch} as content1
+FROM ${CONTENTIMAGE2:-scratch} as content2
+FROM ${CONTENTIMAGE3:-scratch} as content3
+FROM ${INITIMAGE:-${BASEIMAGE:-huggla/base:$TAG}} as init
+FROM ${BUILDIMAGE:-huggla/build} as build
+FROM ${BASEIMAGE:-huggla/base:$TAG} as image
+ARG CONTENTSOURCE1
+ARG CONTENTSOURCE1="${CONTENTSOURCE1:-/}"
+ARG CONTENTDESTINATION1
+ARG CONTENTDESTINATION1="${CONTENTDESTINATION1:-/buildfs/}"
+ARG CONTENTSOURCE2
+ARG CONTENTSOURCE2="${CONTENTSOURCE2:-/}"
+ARG CONTENTDESTINATION2
+ARG CONTENTDESTINATION2="${CONTENTDESTINATION2:-/buildfs/}"
+ARG CONTENTSOURCE3
+ARG CONTENTSOURCE3="${CONTENTSOURCE3:-/}"
+ARG CONTENTDESTINATION3
+ARG CONTENTDESTINATION3="${CONTENTDESTINATION3:-/buildfs/}"
+ARG CLONEGITSDIR
+ARG DOWNLOADSDIR
+ARG MAKEDIRS
+ARG MAKEFILES
+ARG EXECUTABLES
+ARG STARTUPEXECUTABLES
+ARG EXPOSEFUNCTIONS
+ARG GID0WRITABLES
+ARG GID0WRITABLESRECURSIVE
+ARG LINUXUSEROWNED
+COPY --from=build /imagefs /
+RUN [ -n "$LINUXUSEROWNED" ] && chown 102 $LINUXUSEROWNED || true
+#---------------------------------------------
+
+
+#--------Generic template (don't edit)--------
+USER starter
+ONBUILD USER root
+#---------------------------------------------
+
