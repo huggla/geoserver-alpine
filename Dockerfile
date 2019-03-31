@@ -5,21 +5,22 @@ ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 #ARG CONTENTSOURCE1="/gdal"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.13.0"
+ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jre.bin https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin"
 ARG BUILDCMDS=\
-"   cd /buildfs/usr/local "\
-"&& CATALINA_HOME=/buildfs$CATALINA_HOME "\
+"   cd /imagefs/usr/local "\
+"&& CATALINA_HOME=/imagefs$CATALINA_HOME "\
 "&& echo 'yes' | sh \$downloadsDir/jai-1_1_3-lib-linux-amd64-jre.bin "\
 "&& echo 'yes' | sh \$downloadsDir/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 "&& ls -lar /buildfs /imagefs"
 #"&& wget -P /tmp https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin"
 
 #"&& rm -f /tmp/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
-#ARG BUILDCMDS=\
-#"   cd /imagefs$CATALINA_HOME/webapps/geoserver "\
-#"&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
-#"&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
-#ARG REMOVEFILES="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar"
+ARG BUILDCMDS=\
+"   cd /imagefs$CATALINA_HOME/webapps/geoserver "\
+"&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
+"&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
+ARG REMOVEFILES="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar"
 
 #--------Generic template (don't edit)--------
 FROM ${CONTENTIMAGE1:-scratch} as content1
