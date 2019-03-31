@@ -14,10 +14,6 @@ ARG BUILDCMDS=\
 "&& echo 'yes' | sh \$downloadsDir/jai-1_1_3-lib-linux-amd64-jre.bin "\
 "&& echo 'yes' | sh \$downloadsDir/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 "&& ls -lar /buildfs /imagefs "\
-#"&& wget -P /tmp https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin"
-
-#"&& rm -f /tmp/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
-#ARG BUILDCMDS=\
 "&& cd /imagefs$CATALINA_HOME/webapps/geoserver "\
 "&& $JAVA_HOME/bin/jar xvf \$downloadsDir/geoserver.war "\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
