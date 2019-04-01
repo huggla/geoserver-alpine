@@ -51,12 +51,13 @@ COPY --from=build /imagefs /
 RUN [ -n "$LINUXUSEROWNED" ] && chown 102 $LINUXUSEROWNED || true
 #---------------------------------------------
 
-
 #--------Generic template (don't edit)--------
 USER starter
 ONBUILD USER root
 #---------------------------------------------
 
+ENV VAR_GEOS_CONFIG_DIR="/etc/geoserver" \
+    VAR_context_GEOSERVER_DATA_DIR="/geos-data"
 #FROM huggla/build-gdal as gdal
 #FROM anapsix/alpine-java:9_jdk as jdk
 #FROM huggla/tomcat-oracle
