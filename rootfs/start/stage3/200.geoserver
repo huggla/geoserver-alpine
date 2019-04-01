@@ -7,5 +7,5 @@
 
 if [ "$isFirstRun" == "true" ]
 then
-   replaceFileWithLink "/usr/local/tomcat/conf" "$VAR_CONFIG_DIR"
+   replaceFileWithLink "/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml" "$VAR_CONFIG_DIR/web.xml"
 fi
