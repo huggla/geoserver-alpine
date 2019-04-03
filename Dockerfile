@@ -16,6 +16,7 @@ ARG BUILDCMDS=\
 "&& cd \$CATALINA_HOME/webapps/geoserver "\
 "&& \$JAVA_HOME/bin/jar xvf \$downloadsDir/geoserver.war "\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
+ARG GID0WRITABLESRECURSIVE="$CATALINA_HOME/webapps/geoserver"
 ARG REMOVEFILES="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar"
 
 #--------Generic template (don't edit)--------
