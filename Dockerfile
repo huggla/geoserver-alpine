@@ -49,7 +49,18 @@ ARG GID0WRITABLESRECURSIVE
 ARG LINUXUSEROWNED
 ARG LINUXUSEROWNEDRECURSIVE
 COPY --from=build /imagefs /
-RUN ( chown 102 $LINUXUSEROWNED; xargs -a "/environment/linuxuserownedrecursive" chown -R 102; true ) 2>/dev/null
+RUN set -f; \
+    while read file; \
+    do \
+       set +f; \
+       find "$(dirname "$file")" -name "$(basename "$file")" ! -user 102 -maxdepth 1 -exec chown 102 "{}" +; \
+    done </environment/linuxuserowned; \
+    set -f; \
+    while read dir; \
+    do \
+       set +f; \
+       find "$dir" ! -user 102 -exec chown 102 "{}" +; \
+    done </environment/linuxuserownedrecursive
 #---------------------------------------------
 
 #--------Generic template (don't edit)--------
@@ -57,8 +68,7 @@ USER starter
 ONBUILD USER root
 #---------------------------------------------
 
-ENV VAR_GEOS_CONFIG_DIR="/etc/geoserver" \
-    VAR_context_GEOSERVER_DATA_DIR="/geos-data"
+ENV VAR_context_GEOSERVER_DATA_DIR="/geos-data"
 #FROM huggla/build-gdal as gdal
 #FROM anapsix/alpine-java:9_jdk as jdk
 #FROM huggla/tomcat-oracle
