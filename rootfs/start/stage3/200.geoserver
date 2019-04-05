@@ -9,6 +9,6 @@ if [ "$isFirstRun" == "true" ]
 then
    runBinCmdAsLinuxUser '/bin/sh - << eof
       . /start/functions/replaceFileWithLink
-      replaceFileWithLink "$VAR_WEBAPPS_DIR/geoserver/WEB-INF/web.xml" "$VAR_CONFIG_DIR/web.xml"
+      replaceFileWithLink "$VAR_WEBAPPS_DIR/geoserver/WEB-INF/web.xml" "$VAR_GEOS_CONFIG_DIR/web.xml"
 eof'
 fi
