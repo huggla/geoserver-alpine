@@ -47,8 +47,9 @@ ARG EXPOSEFUNCTIONS
 ARG GID0WRITABLES
 ARG GID0WRITABLESRECURSIVE
 ARG LINUXUSEROWNED
+ARG LINUXUSEROWNEDRECURSIVE
 COPY --from=build /imagefs /
-RUN [ -n "$LINUXUSEROWNED" ] && chown 102 $LINUXUSEROWNED || true
+RUN ( chown 102 $LINUXUSEROWNED; xargs -a "/environment/linuxuserownedrecursive" chown -R 102; true ) 2>/dev/null
 #---------------------------------------------
 
 #--------Generic template (don't edit)--------
