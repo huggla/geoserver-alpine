@@ -1,0 +1,20 @@
+# Set in stage2:
+# ---------------------------------------------------------
+# set -e +a +m +s +i -f
+# isFirstRun
+# VAR_*
+# All functions in /start/functions
+
+local configFile="$VAR_WEBAPPS_DIR/geoserver/WEB-INF/web.xml"
+local contextParams="$(configFromVarGroup context)"
+local IFS=$(echo -en "\n\b")
+local param=""
+for param in $contextParams
+do
+   {
+      echo '<context-param>'
+      echo ' <param-name>'${param%%=*}'</param-name>'
+      echo ' <param-value>'${param#*=}'</param-value>'
+      echo '</context-param>'
+   } >> "$configFile"
+done
