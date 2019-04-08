@@ -66,7 +66,9 @@ ENV VAR_context_GEOSERVER_DATA_DIR="/geos-data" \
     VAR_filter_SessionDebugger="org.geoserver.filters.SessionDebugFilter" \
     VAR_filter_filterChainProxy="org.springframework.web.filter.DelegatingFilterProxy" \
     VAR_filter_xFrameOptionsFilter="org.geoserver.filters.XFrameOptionsFilter" \
-    VAR_filter_GZIP_Compression_FilterINcompressed__types="org.geoserver.filters.GZIPFilter|
+    VAR_filter_GZIP_Compression_FilterINcompressed__types="org.geoserver.filters.GZIPFilter|text/.*,.*xml.*,application/json,application/x-javascript" \
+    VAR_filter_Request_Logging_FilterINenabled="org.geoserver.filters.LoggingFilter|false" \
+    
 #FROM huggla/build-gdal as gdal
 #FROM anapsix/alpine-java:9_jdk as jdk
 #FROM huggla/tomcat-oracle
