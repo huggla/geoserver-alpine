@@ -57,7 +57,16 @@ USER starter
 ONBUILD USER root
 #---------------------------------------------
 
-ENV VAR_context_GEOSERVER_DATA_DIR="/geos-data"
+ENV VAR_context_GEOSERVER_DATA_DIR="/geos-data" \
+    VAR_context_serviceStrategy="PARTIAL-BUFFER2" \
+    VAR_context_PARTIAL_BUFFER_STRATEGY_SIZE="50" \
+    VAR_context_contextConfigLocation="classpath*:/applicationContext.xml classpath*:/applicationSecurityContext.xml" \
+    VAR_filter_FlushSafeFilter="org.geoserver.filters.FlushSafeFilter" \
+    VAR_filter_Set__Character__Encoding|encoding="org.springframework.web.filter.CharacterEncodingFilter|UTF-8" \
+    VAR_filter_SessionDebugger="org.geoserver.filters.SessionDebugFilter" \
+    VAR_filter_filterChainProxy="org.springframework.web.filter.DelegatingFilterProxy" \
+    VAR_filter_xFrameOptionsFilter="org.geoserver.filters.XFrameOptionsFilter" \
+    VAR_filter_GZIP__Compression__Filter|compressed-types="org.geoserver.filters.GZIPFilter|
 #FROM huggla/build-gdal as gdal
 #FROM anapsix/alpine-java:9_jdk as jdk
 #FROM huggla/tomcat-oracle
