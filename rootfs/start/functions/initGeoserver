@@ -1,0 +1,23 @@
+initGeoserver(){
+   local configFile="$VAR_WEBAPPS_DIR/geoserver/WEB-INF/web.xml"
+   if [ ! -s "$configFile" ]
+   then
+      local contextParams="$(configFromVarGroup context)"
+      local IFS=$(echo -en "\n\b")
+      local param=""
+      {
+         echo '<?xml version="1.0" encoding="UTF-8"?>'
+         echo '<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">'
+         echo '<web-app>'
+         echo ' <display-name>GeoServer</display-name>'
+         for param in $contextParams
+         do
+            echo " <context-param>"
+            echo "  <param-name>$(trim "${param%%=*}")</param-name>"
+            echo "  <param-value>$(trim "${param#*=}")</param-value>"
+            echo " </context-param>"
+         done
+         echo '</web-app>'
+      } >> "$configFile"
+   fi
+}
