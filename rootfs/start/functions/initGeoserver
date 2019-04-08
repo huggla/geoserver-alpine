@@ -1,4 +1,7 @@
 initGeoserver(){
+   local filter_dblUScore=" "
+   local filter_triUScore="-"
+   
    local contextParams="$(configFromVarGroup context)"
    local IFS=$(echo -en "\n\b")
    local param=""
