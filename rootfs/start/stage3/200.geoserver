@@ -5,7 +5,7 @@
 # VAR_*
 # All functions in /start/functions
 
-if [ ! -s "$VAR_WEBAPPS_DIR/geoserver/WEB-INF/web.xml" ]
+if [ ! -s "/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml" ]
 then
    initGeoserver
 fi
