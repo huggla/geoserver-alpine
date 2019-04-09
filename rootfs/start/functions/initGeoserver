@@ -3,6 +3,7 @@ initGeoserver(){
    local IFS=$(echo -en "\n\b")
    local param=""
    {
+      cat "$VAR_WEBAPPS_DIR/geoserver/WEB-INF/web.xml.tmp1"
       for param in $contextParams
       do
          echo " <context-param>"
@@ -10,6 +11,6 @@ initGeoserver(){
          echo "  <param-value>$(trim "${param#*=}")</param-value>"
          echo " </context-param>"
       done
-      cat "$VAR_WEBAPPS_DIR/geoserver/WEB-INF/web.xml.tmp"
-   } >> "$VAR_WEBAPPS_DIR/geoserver/WEB-INF/web.xml"
+      cat "$VAR_WEBAPPS_DIR/geoserver/WEB-INF/web.xml.tmp2"
+   } > "$VAR_WEBAPPS_DIR/geoserver/WEB-INF/web.xml"
 }
