@@ -16,7 +16,9 @@ ARG BUILDCMDS=\
 "&& cd \$CATALINA_HOME/webapps/geoserver "\
 "&& \$JAVA_HOME/bin/jar xvf \$downloadsDir/geoserver.war "\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/ "\
-"&& >WEB-INF/web.xml"
+"&& mv WEB-INF/web.xml WEB-INF/web.xml.tmp "\
+"&& sed '/<display-name>/q' WEB-INF/web.xml.tmp > WEB-INF/web.xml "\
+"&& sed -i -n '/<filter>/,$p' WEB-INF/web.xml.tmp"
 ARG REMOVEFILES="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar"
 
 #--------Generic template (don't edit)--------
@@ -60,14 +62,7 @@ ONBUILD USER root
 ENV VAR_context_GEOSERVER_DATA_DIR="/geos-data" \
     VAR_context_serviceStrategy="PARTIAL-BUFFER2" \
     VAR_context_PARTIAL_BUFFER_STRATEGY_SIZE="50" \
-    VAR_context_contextConfigLocation="classpath*:/applicationContext.xml classpath*:/applicationSecurityContext.xml" \
-    VAR_filter_FlushSafeFilter="org.geoserver.filters.FlushSafeFilter" \
-    VAR_filter_Set_Character_EncodingINencoding="org.springframework.web.filter.CharacterEncodingFilter|UTF-8" \
-    VAR_filter_SessionDebugger="org.geoserver.filters.SessionDebugFilter" \
-    VAR_filter_filterChainProxy="org.springframework.web.filter.DelegatingFilterProxy" \
-    VAR_filter_xFrameOptionsFilter="org.geoserver.filters.XFrameOptionsFilter" \
-    VAR_filter_GZIP_Compression_FilterINcompressed__types="org.geoserver.filters.GZIPFilter|text/.*,.*xml.*,application/json,application/x-javascript" \
-    VAR_filter_Request_Logging_FilterINenabled="org.geoserver.filters.LoggingFilter|false" \
+    VAR_context_contextConfigLocation="classpath*:/applicationContext.xml classpath*:/applicationSecurityContext.xml"
     
 #FROM huggla/build-gdal as gdal
 #FROM anapsix/alpine-java:9_jdk as jdk
