@@ -15,10 +15,7 @@ ARG BUILDCMDS=\
 "&& echo 'yes' | sh \$downloadsDir/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 "&& cd \$CATALINA_HOME/webapps/geoserver "\
 "&& \$JAVA_HOME/bin/jar xvf \$downloadsDir/geoserver.war "\
-"&& cp -a \$downloadsDir/*.jar WEB-INF/lib/ "\
-"&& sed '/<display-name>/q' WEB-INF/web.xml > WEB-INF/web.xml.tmp1 "\
-"&& sed -n '/<filter>/,\$p' WEB-INF/web.xml > WEB-INF/web.xml.tmp2 "\
-"&& >WEB-INF/web.xml"
+"&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
 ARG REMOVEFILES="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar"
 
 #--------Generic template (don't edit)--------
