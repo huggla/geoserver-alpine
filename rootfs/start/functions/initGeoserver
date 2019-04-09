@@ -14,5 +14,5 @@ initGeoserver(){
          echo " </context-param>"
       done
       cat "/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml.tmp2"
-   } > "/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml"
+   } >> "/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml"
 }
