@@ -62,7 +62,7 @@ ONBUILD USER root
 ENV VAR_context1_serviceStrategy="PARTIAL-BUFFER2" \
     VAR_context2_PARTIAL_BUFFER_STRATEGY_SIZE="50" \
     VAR_context3_contextConfigLocation="classpath*:/applicationContext.xml classpath*:/applicationSecurityContext.xml" \
-    VAR_context4_GEOSERVER_DATA_DIR="/geos-data"
+    VAR_GEOSERVER_DATA_DIR="/geos-data"
     
 #FROM huggla/build-gdal as gdal
 #FROM anapsix/alpine-java:9_jdk as jdk
