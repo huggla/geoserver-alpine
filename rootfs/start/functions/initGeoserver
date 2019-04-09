@@ -1,4 +1,5 @@
 initGeoserver(){
+   VAR_context4_GEOSERVER_DATA_DIR="/usr/local/tomcat/webapps/geoserver/data"
    local contextParams="$(configFromVarGroup context)"
    local IFS=$(echo -en "\n\b")
    local param=""
