@@ -11,7 +11,8 @@ then
    local start="$(expr $dataDirPoint - 2)"
    local end="$(expr $dataDirPoint + 3)"
    sed -i "${start}d;${end}d" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
-   sed -i "s/C:\\eclipse\\workspace\\geoserver_trunk\\cite\\confCiteWFSPostGIS/'$VAR_DATA_DIR'/" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
+   local str='C:\eclipse\workspace\geoserver_trunk\cite\confCiteWFSPostGIS'
+   sed -i "s/$str/'$VAR_DATA_DIR'/" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
    if [ ! -s "$VAR_DATA_DIR" ]
    then
       mv "/usr/local/tomcat/webapps/geoserver/data" "$VAR_DATA_DIR"
