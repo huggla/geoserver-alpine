@@ -18,7 +18,7 @@ ARG BUILDCMDS=\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/ "\
 "&& sed '/<display-name>/q' WEB-INF/web.xml > WEB-INF/web.xml.tmp1 "\
 "&& sed -n '/<filter>/,\$p' WEB-INF/web.xml > WEB-INF/web.xml.tmp2 "\
-"&& rm -f WEB-INF/web.xml"
+"&& mv WEB-INF/web.xml.org"
 ARG REMOVEFILES="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/imageio-ext-gdal-bindings-*.jar"
 
 #--------Generic template (don't edit)--------
