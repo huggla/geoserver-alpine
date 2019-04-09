@@ -5,7 +5,7 @@
 # VAR_*
 # All functions in /start/functions
 
-if [ ! -s "/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml" ]
+if [ "$isFirstRun" == "true" ]
 then
-   initGeoserver
+   replaceDirWithLink "/usr/local/tomcat/webapps/geoserver/data" "$VAR_DATA_DIR"
 fi
