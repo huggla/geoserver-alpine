@@ -9,7 +9,7 @@ if [ "$isFirstRun" == "true" ] && [ -n "$VAR_DATA_DIR" ] && [ "$VAR_DATA_DIR" !=
 then
    local nameRow="$(sed -n '/GEOSERVER_DATA_DIR/{=;q;}' '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml')"
    local valueRow="$(expr $nameRow + 1)"
-   sed -i "${valueRow}s|>.*<|>'$VAR_DATA_DIR'<|" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
+   sed -i "${valueRow}s|>.*<|>$VAR_DATA_DIR<|" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
    local startRow="$(expr $nameRow - 2)"
    local endRow="$(expr $nameRow + 3)"
    sed -i "${startRow}d;${endRow}d" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
