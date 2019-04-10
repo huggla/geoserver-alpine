@@ -7,12 +7,12 @@
 
 if [ "$isFirstRun" == "true" ] && [ -n "$VAR_DATA_DIR" ] && [ "$VAR_DATA_DIR" != "/usr/local/tomcat/webapps/geoserver/data" ]
 then
-   local dataDirPoint="$(sed -n '/GEOSERVER_DATA_DIR/{=;q;}' '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml')"
-   local start="$(expr $dataDirPoint - 2)"
-   local end="$(expr $dataDirPoint + 3)"
+   local nameRow="$(sed -n '/GEOSERVER_DATA_DIR/{=;q;}' '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml')"
+   local valueRow="$(expr $nameRow + 1)"
+   sed -i "${valueRow}s|>.*<|>'$VAR_DATA_DIR'>|" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
+   local startRow="$(expr $nameRow - 2)"
+   local endRow="$(expr $nameRow + 3)"
    sed -i "${start}d;${end}d" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
-   local str='C:\eclipse\workspace\geoserver_trunk\cite\confCiteWFSPostGIS'
-   sed -i "s|$str|'$VAR_DATA_DIR'|" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
    if [ ! -s "$VAR_DATA_DIR" ]
    then
       mv "/usr/local/tomcat/webapps/geoserver/data" "$VAR_DATA_DIR"
