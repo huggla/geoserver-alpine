@@ -13,8 +13,4 @@ then
    local startRow="$(expr $nameRow - 2)"
    local endRow="$(expr $nameRow + 3)"
    sed -i "${startRow}d;${endRow}d" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
-   if [ ! -s "$VAR_DATA_DIR" ]
-   then
-      mv "/usr/local/tomcat/webapps/geoserver/data" "$VAR_DATA_DIR"
-   fi
 fi
