@@ -1,4 +1,4 @@
-ARG TAG="20190401"
+ARG TAG="20190411"
 ARG CATALINA_HOME="/usr/local/tomcat"
 ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 #ARG CONTENTIMAGE1="huggla/build-gdal"
