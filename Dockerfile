@@ -17,6 +17,7 @@ ARG BUILDCMDS=\
 "&& wget https://demo.geo-solutions.it/share/github/imageio-ext/releases/1.1.X/1.1.28/native/gdal/linux/gdal192-Ubuntu12-gcc4.6.3-x86_64.tar.gz "\
 "&& tar -xvp -f gdal192-Ubuntu12-gcc4.6.3-x86_64.tar.gz "\
 "&& cp -a javainfo/imageio-ext-gdal-bindings-1.9.2.jar \$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/ "\
+"&& rm -rf javainfo* "\
 #"&& echo 'yes' | sh \$downloadsDir/jai-1_1_3-lib-linux-amd64-jre.bin "\
 #"&& echo 'yes' | sh \$downloadsDir/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 "&& cd \$CATALINA_HOME/webapps/geoserver "\
