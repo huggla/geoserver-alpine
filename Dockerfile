@@ -3,11 +3,11 @@ ARG CATALINA_HOME="/usr/local/tomcat"
 ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 #ARG CONTENTIMAGE1="huggla/build-gdal"
 #ARG CONTENTSOURCE1="/gdal"
-ARG RUNDEPS="openjdk8-jre fontconfig"
+ARG RUNDEPS="openjdk8-jre libjpeg-turbo ttf-dejavu"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.15.0"
 ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver"
-ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-ogr-wfs-plugin.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-gdal-plugin.zip https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64-jre.bin https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64-jre.bin https://demo.geo-solutions.it/share/github/imageio-ext/releases/1.1.X/1.1.28/native/gdal/gdal-data.zip"
+ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-libjpeg-turbo-plugin.zip"
 ARG BUILDCMDS=\
 "   cd /imagefs/usr/local/lib "\
 "&& CATALINA_HOME=/imagefs$CATALINA_HOME "\
