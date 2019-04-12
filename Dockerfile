@@ -25,8 +25,8 @@ ARG BUILDCMDS=\
 "&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
 #"&& unzip -q \$downloadsDir/geoserver.war "\
 "&& cp -a \$downloadsDir/gdal-data / "\
-"&& cp -a \$downloadsDir/ljtlinux64.jar WEB-INF/lib/ "\
-"&& rm -f \$downloadsDir/ljt* "\
+#"&& cp -a \$downloadsDir/ljtlinux64.jar WEB-INF/lib/ "\
+#"&& rm -f \$downloadsDir/ljt* "\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
 ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data"
 
