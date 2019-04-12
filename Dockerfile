@@ -8,7 +8,7 @@ ARG RUNDEPS="openjdk8-jre libjpeg-turbo"
 ARG RUNDEPS_UNTRUSTED="ttf-font-awesome"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.15.0"
-ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver"
+ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-libjpeg-turbo-plugin.zip https://sourceforge.net/projects/libjpeg-turbo/files/2.0.2/libjpeg-turbo-2.0.2-jws.zip"
 ARG BUILDCMDS=\
 "   cd /imagefs/usr/local/lib "\
