@@ -12,7 +12,7 @@ ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-libjpeg-turbo-plugin.zip https://demo.geo-solutions.it/share/github/imageio-ext/releases/native/gdal/1.9.2/gdal-data.zip"
 ARG BUILDCMDS=\
 "   cd /imagefs/usr/lib "\
-"&& ln -s libturbojpeg.so.0.2.0 libjpegturbo.so "\
+"&& mv libturbojpeg.so.0.2 libturbojpeg.so "\
 "&& cd /imagefs/usr/local/lib "\
 "&& CATALINA_HOME=/imagefs$CATALINA_HOME "\
 "&& wget https://demo.geo-solutions.it/share/github/imageio-ext/releases/native/gdal/1.9.2/linux/gdal192-Ubuntu12-gcc4.6.3-x86_64.tar.gz "\
