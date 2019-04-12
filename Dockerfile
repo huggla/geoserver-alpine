@@ -4,8 +4,9 @@ ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 #ARG CONTENTIMAGE1="huggla/build-gdal"
 #ARG CONTENTSOURCE1="/gdal"
 ARG ADDREPOS="https://dl-cdn.alpinelinux.org/alpine/edge/testing"
-ARG RUNDEPS="openjdk8-jre libjpeg-turbo ttf-font-awesome"
-ARG BUILDDEPS="openjdk8"
+ARG RUNDEPS="openjdk8-jre libjpeg-turbo"
+ARG RUNDEPS_UNTRUSTED="ttf-font-awesome"
+#ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.15.0"
 ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-libjpeg-turbo-plugin.zip https://sourceforge.net/projects/libjpeg-turbo/files/2.0.2/libjpeg-turbo-2.0.2-jws.zip"
@@ -19,7 +20,8 @@ ARG BUILDCMDS=\
 #"&& echo 'yes' | sh \$downloadsDir/jai-1_1_3-lib-linux-amd64-jre.bin "\
 #"&& echo 'yes' | sh \$downloadsDir/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 "&& cd \$CATALINA_HOME/webapps/geoserver "\
-"&& \$JAVA_HOME/bin/jar xvf \$downloadsDir/geoserver.war "\
+#"&& \$JAVA_HOME/bin/jar xvf \$downloadsDir/geoserver.war "\
+"&& unzip -q \$downloadsDir/geoserver.war "\
 "&& cp -a \$downloadsDir/ljtlinux64.jar WEB-INF/lib/ "\
 "&& rm -f \$downloadsDir/ljt* "\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
