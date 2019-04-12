@@ -9,13 +9,13 @@ ARG RUNDEPS_UNTRUSTED="ttf-font-awesome"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.15.0"
 ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib"
-ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-libjpeg-turbo-plugin.zip"
+ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-libjpeg-turbo-plugin.zip https://demo.geo-solutions.it/share/github/imageio-ext/releases/native/gdal/1.9.2/gdal-data.zip"
 ARG BUILDCMDS=\
 "   cd /imagefs/usr/lib "\
 "&& ln -s libturbojpeg.so.0.2.0 libjpegturbo.so "\
 "&& cd /imagefs/usr/local/lib "\
 "&& CATALINA_HOME=/imagefs$CATALINA_HOME "\
-"&& wget https://demo.geo-solutions.it/share/github/imageio-ext/releases/1.1.X/1.1.28/native/gdal/linux/gdal192-Ubuntu12-gcc4.6.3-x86_64.tar.gz "\
+"&& wget https://demo.geo-solutions.it/share/github/imageio-ext/releases/native/gdal/1.9.2/linux/gdal192-Ubuntu12-gcc4.6.3-x86_64.tar.gz "\
 "&& tar -xvp -f gdal192-Ubuntu12-gcc4.6.3-x86_64.tar.gz "\
 "&& cp -a javainfo/imageio-ext-gdal-bindings-1.9.2.jar \$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/ "\
 #"&& rm -rf javainfo* "\
@@ -24,6 +24,7 @@ ARG BUILDCMDS=\
 "&& cd \$CATALINA_HOME/webapps/geoserver "\
 "&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
 #"&& unzip -q \$downloadsDir/geoserver.war "\
+"&& cp -a \$downloadsDir/gdal-data / "\
 "&& cp -a \$downloadsDir/ljtlinux64.jar WEB-INF/lib/ "\
 "&& rm -f \$downloadsDir/ljt* "\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
