@@ -3,7 +3,7 @@ ARG CATALINA_HOME="/usr/local/tomcat"
 ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 #ARG CONTENTIMAGE1="huggla/build-gdal"
 #ARG CONTENTSOURCE1="/gdal"
-ARG RUNDEPS="openjdk8-jre ttf-dejavu"
+ARG RUNDEPS="openjdk8-jre"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.15.0"
 ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver"
@@ -12,8 +12,8 @@ ARG BUILDCMDS=\
 "   cd /imagefs/usr/local "\
 "&& CATALINA_HOME=/imagefs$CATALINA_HOME "\
 "&& JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk "\
-"&& echo 'yes' | sh \$downloadsDir/jai-1_1_3-lib-linux-amd64-jre.bin "\
-"&& echo 'yes' | sh \$downloadsDir/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
+#"&& echo 'yes' | sh \$downloadsDir/jai-1_1_3-lib-linux-amd64-jre.bin "\
+#"&& echo 'yes' | sh \$downloadsDir/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
 "&& cd \$CATALINA_HOME/webapps/geoserver "\
 "&& \$JAVA_HOME/bin/jar xvf \$downloadsDir/geoserver.war "\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
