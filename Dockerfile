@@ -30,6 +30,7 @@ ARG BUILDCMDS=\
 #"&& rm -f \$downloadsDir/ljt* "\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/ "\
 "&& cp -a /usr/lib/jvm/java-1.8-openjdk/bin/* /imagefs/usr/lib/jvm/java-1.8-openjdk/bin/ "\
+"&& mkdir -p /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/bin/ "\
 "&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/bin/policytool /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/bin/ "\
 "&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/* /imagefs/usr/lib/"
 ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data"
