@@ -4,8 +4,8 @@ ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 #ARG CONTENTIMAGE1="huggla/build-gdal"
 #ARG CONTENTSOURCE1="/gdal"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
-ARG RUNDEPS="openjdk8-jre"
-ARG EXCLUDEDEPS="openjdk8-jre"
+#ARG RUNDEPS="openjdk8-jre"
+#ARG EXCLUDEDEPS="openjdk8-jre"
 ARG RUNDEPS_UNTRUSTED="ttf-font-awesome"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.15.0"
@@ -28,7 +28,8 @@ ARG BUILDCMDS=\
 #"&& cp -a \$downloadsDir/gdal-data / "\
 #"&& cp -a \$downloadsDir/ljtlinux64.jar WEB-INF/lib/ "\
 #"&& rm -f \$downloadsDir/ljt* "\
-"&& cp -a \$downloadsDir/*.jar WEB-INF/lib/"
+"&& cp -a \$downloadsDir/*.jar WEB-INF/lib/ "\
+"&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so /usr/lib/libfreetype.so* /imagefs/usr/lib/"
 ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data"
 
 #--------Generic template (don't edit)--------
