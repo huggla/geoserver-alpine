@@ -5,7 +5,7 @@ ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 #ARG CONTENTSOURCE1="/gdal"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
 ARG RUNDEPS="freetype openjdk8-jre"
-ARG EXCLUDEAPKS="libgcc libxrender libxi libxcomposite nss giflib libpng libxtst alsa-lib"
+ARG EXCLUDEAPKS="libgcc libxrender libxi libxcomposite nss giflib libxtst alsa-lib"
 #ARG EXCLUDEDEPS="openjdk8-jre"
 ARG RUNDEPS_UNTRUSTED="ttf-font-awesome"
 ARG BUILDDEPS="openjdk8"
@@ -34,7 +34,7 @@ ARG BUILDCMDS=\
 #"&& mkdir -p /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/bin /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64 "\
 #"&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/bin/policytool /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/bin/ "\
 #"&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/* /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64"
-ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data"
+ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data $CATALINA_HOME/usr/lib/jvm/java-1.8-openjdk/jre"
 
 #--------Generic template (don't edit)--------
 FROM ${CONTENTIMAGE1:-scratch} as content1
