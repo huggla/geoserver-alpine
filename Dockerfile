@@ -34,7 +34,7 @@ ARG BUILDCMDS=\
 #"&& mkdir -p /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/bin /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64 "\
 #"&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/bin/policytool /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/bin/ "\
 #"&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/* /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64"
-ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data $CATALINA_HOME/usr/lib/jvm/java-1.8-openjdk/jre"
+ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data /usr/lib/jvm"
 
 #--------Generic template (don't edit)--------
 FROM ${CONTENTIMAGE1:-scratch} as content1
