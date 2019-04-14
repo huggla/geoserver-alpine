@@ -2,7 +2,7 @@ ARG TAG="20190411"
 ARG CATALINA_HOME="/usr/local/tomcat"
 ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
-ARG RUNDEPS="freetype"
+ARG RUNDEPS="freetype openjdk8-jre"
 ARG RUNDEPS_UNTRUSTED="ttf-font-awesome"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.15.0"
@@ -18,7 +18,7 @@ ARG BUILDCMDS=\
 #"&& cp -a \$downloadsDir/*.jar \$downloadsDir/jai-1_1_3/lib/*.jar \$downloadsDir/jai_imageio-1_1/lib/*.jar WEB-INF/lib/ "\
 #"&& cp -a \$downloadsDir/jai-1_1_3/lib/*.so \$downloadsDir/jai_imageio-1_1/lib/*.so /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so /imagefs/usr/local/lib/amd64/"
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/ "\
-"&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so /imagefs/usr/local/lib/amd64/"
+#"&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so /imagefs/usr/local/lib/amd64/"
 ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data"
 
 #--------Generic template (don't edit)--------
