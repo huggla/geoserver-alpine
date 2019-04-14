@@ -1,13 +1,8 @@
 ARG TAG="20190411"
 ARG CATALINA_HOME="/usr/local/tomcat"
 ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
-#ARG CONTENTIMAGE1="huggla/build-gdal"
-#ARG CONTENTSOURCE1="/gdal"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
-#ARG RUNDEPS="freetype openjdk8-jre"
 ARG RUNDEPS="freetype"
-#ARG EXCLUDEAPKS="libgcc libxrender libxi libxcomposite nss giflib libxtst alsa-lib"
-#ARG EXCLUDEDEPS="openjdk8-jre"
 ARG RUNDEPS_UNTRUSTED="ttf-font-awesome"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.15.0"
@@ -16,27 +11,10 @@ ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOS
 ARG BUILDCMDS=\
 "   cd /imagefs/usr/lib "\
 "&& ln -s libturbojpeg.so.0.2.0 libturbojpeg.so "\
-#"&& cd /imagefs/usr/local/lib "\
-"&& CATALINA_HOME=/imagefs$CATALINA_HOME "\
-#"&& wget https://demo.geo-solutions.it/share/github/imageio-ext/releases/native/gdal/1.9.2/linux/gdal192-Ubuntu12-gcc4.6.3-x86_64.tar.gz "\
-#"&& tar -xvp -f gdal192-Ubuntu12-gcc4.6.3-x86_64.tar.gz "\
-#"&& cp -a javainfo/imageio-ext-gdal-bindings-1.9.2.jar \$CATALINA_HOME/webapps/geoserver/WEB-INF/lib/ "\
-#"&& rm -rf javainfo* "\
-#"&& echo 'yes' | sh \$downloadsDir/jai-1_1_3-lib-linux-amd64-jre.bin "\
-#"&& echo 'yes' | sh \$downloadsDir/jai_imageio-1_1-lib-linux-amd64-jre.bin "\
-"&& cd \$CATALINA_HOME/webapps/geoserver "\
+"&& cd /imagefs$CATALINA_HOME/webapps/geoserver "\
 "&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
-#"&& unzip -q \$downloadsDir/geoserver.war "\
-#"&& cp -a \$downloadsDir/gdal-data / "\
-#"&& cp -a \$downloadsDir/ljtlinux64.jar WEB-INF/lib/ "\
-#"&& rm -f \$downloadsDir/ljt* "\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/ "\
 "&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so /imagefs/usr/local/lib/amd64/"
-#"&& cp -a /usr/lib/jvm/java-1.8-openjdk/bin/* /imagefs/usr/lib/jvm/java-1.8-openjdk/bin/ "\
-#"&& mkdir -p /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/bin /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64 "\
-#"&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/bin/policytool /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/bin/ "\
-#"&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/* /imagefs/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64"
-#ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data /usr/lib/jvm/java-1.8-openjdk/lib /usr/lib/jvm/java-1.8-openjdk/bin"
 ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data"
 
 #--------Generic template (don't edit)--------
