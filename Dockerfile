@@ -10,8 +10,9 @@ ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver"
 #ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-libjpeg-turbo-plugin.zip https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64.tar.gz https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64.tar.gz"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-libjpeg-turbo-plugin.zip"
 ARG BUILDCMDS=\
-"   cd /imagefs/usr/lib "\
-"&& ln -s libturbojpeg.so.0.2.0 libturbojpeg.so "\
+#"   cd /imagefs/usr/lib "\
+    cd /imagefs/usr/local/lib/amd64 "\
+"&& ln -s ../../../lib/libturbojpeg.so.0.2.0 libturbojpeg.so "\
 "&& cd /imagefs$CATALINA_HOME/webapps/geoserver "\
 "&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
 #"&& cp -a \$downloadsDir/*.jar \$downloadsDir/jai-1_1_3/lib/*.jar \$downloadsDir/jai_imageio-1_1/lib/*.jar WEB-INF/lib/ "\
