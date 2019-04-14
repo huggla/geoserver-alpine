@@ -11,9 +11,10 @@ ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOS
 ARG BUILDCMDS=\
 "   cd /imagefs$CATALINA_HOME/webapps/geoserver "\
 "&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
-"&& cp -a /usr/lib/libturbojpeg.so.0.2.0 /imagefs/usr/local/lib/amd64/libturbojpeg.so "\
 "&& cp -a \$downloadsDir/*.jar \$downloadsDir/jai-1_1_3/lib/*.jar \$downloadsDir/jai_imageio-1_1/lib/*.jar WEB-INF/lib/ "\
-"&& cp -a \$downloadsDir/jai-1_1_3/lib/*.so \$downloadsDir/jai_imageio-1_1/lib/*.so /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so /imagefs/usr/local/lib/amd64/"
+"&& cd /imagefs/usr/local/lib/amd64 "\
+"&& cp -a \$downloadsDir/jai-1_1_3/lib/*.so \$downloadsDir/jai_imageio-1_1/lib/*.so /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so ./ "\
+"&& ln -s ../../../lib/libturbojpeg.so.0.2.0 libturbojpeg.so"
 ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data"
 
 #--------Generic template (don't edit)--------
