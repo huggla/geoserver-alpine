@@ -6,7 +6,7 @@ ARG RUNDEPS="freetype"
 ARG RUNDEPS_UNTRUSTED="ttf-font-awesome"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.15.0"
-#ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib"
+ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-libjpeg-turbo-plugin.zip"
 ARG BUILDCMDS=\
 "   cd /imagefs/usr/lib "\
@@ -15,7 +15,7 @@ ARG BUILDCMDS=\
 "&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
 "&& cp -a \$downloadsDir/*.jar WEB-INF/lib/ "\
 "&& cp -a /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so /imagefs/usr/local/lib/amd64/"
-ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data"
+ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data /usr/lib/jvm /sbin"
 
 #--------Generic template (don't edit)--------
 FROM ${CONTENTIMAGE1:-scratch} as content1
