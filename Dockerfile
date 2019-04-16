@@ -18,7 +18,7 @@ ARG BUILDCMDS=\
 "&& ln -s libturbojpeg.so.0.2.0 jpeg-turbo.so "\
 "&& ln -s libturbojpeg.so.0.2.0 libturbo-jpeg.so "\
 "&& ln -s libturbojpeg.so.0.2.0 jpegturbo.so "\
-"&& ln -s libturbojpeg.so.0.2.0 jpeg-turbo.so "\
+"&& ln -s libturbojpeg.so.0.2.0 turbo-jpeg.so "\
 "&& cd /imagefs/usr/local/lib "\
 "&& CATALINA_HOME=/imagefs$CATALINA_HOME "\
 "&& JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk "\
