@@ -12,7 +12,7 @@ ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver/WEB-INF/lib"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-libjpeg-turbo-plugin.zip https://sourceforge.net/projects/libjpeg-turbo/files/2.0.2/libjpeg-turbo-2.0.2-jws.zip"
 ARG BUILDCMDS=\
 "   cd /imagefs/usr/lib "\
-"&& ln -s libturbojpeg.so.0.2.0 libjpegturbo.so "\
+"&& ln -s libturbojpeg.so.0.2.0 libturbojpeg.so "\
 "&& cd /imagefs/usr/local/lib "\
 "&& CATALINA_HOME=/imagefs$CATALINA_HOME "\
 "&& JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk "\
