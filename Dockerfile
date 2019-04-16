@@ -4,7 +4,7 @@ ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 #ARG CONTENTIMAGE1="huggla/build-gdal"
 #ARG CONTENTSOURCE1="/gdal"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
-ARG RUNDEPS="openjdk8-jre libjpeg-turbo libjpeg-turbo-utils"
+ARG RUNDEPS="openjdk8-jre libjpeg-turbo libjpeg-turbo-utils libjpeg-turbo-dev"
 ARG RUNDEPS_UNTRUSTED="ttf-font-awesome"
 ARG BUILDDEPS="openjdk8"
 ARG GEOSERVER_VERSION="2.15.0"
@@ -13,6 +13,12 @@ ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOS
 ARG BUILDCMDS=\
 "   cd /imagefs/usr/lib "\
 "&& ln -s libturbojpeg.so.0.2.0 libturbojpeg.so "\
+"&& ln -s libturbojpeg.so.0.2.0 libjpegturbo.so "\
+"&& ln -s libturbojpeg.so.0.2.0 libjpeg-turbo.so "\
+"&& ln -s libturbojpeg.so.0.2.0 jpeg-turbo.so "\
+"&& ln -s libturbojpeg.so.0.2.0 libturbo-jpeg.so "\
+"&& ln -s libturbojpeg.so.0.2.0 jpegturbo.so "\
+"&& ln -s libturbojpeg.so.0.2.0 jpeg-turbo.so "\
 "&& cd /imagefs/usr/local/lib "\
 "&& CATALINA_HOME=/imagefs$CATALINA_HOME "\
 "&& JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk "\
