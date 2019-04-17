@@ -17,7 +17,10 @@ ARG BUILDCMDS=\
 "&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf \$downloadsDir/geoserver.war "\
 "&& cp -a \$downloadsDir/*.jar \$downloadsDir/jai-1_1_3/lib/*.jar \$downloadsDir/jai_imageio-1_1/lib/*.jar WEB-INF/lib/ "\
 "&& cd /imagefs/usr/local/lib/amd64 "\
-"&& cp -a \$downloadsDir/jai-1_1_3/lib/*.so \$downloadsDir/jai_imageio-1_1/lib/*.so /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so ./"
+"&& cp -a \$downloadsDir/jai-1_1_3/lib/*.so \$downloadsDir/jai_imageio-1_1/lib/*.so /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so ./ "\
+"&& cd /imagefs "\
+"&& (find * ! -type d ! -type c -type l ! -path 'var/cache/*' ! -path 'tmp/*' -prune -exec echo -n \"/{}>\" \\; -exec readlink \"{}\" \\; && find * ! -type d ! -type c ! -type l ! -path 'var/cache/*' ! -path 'tmp/*' -prune -exec md5sum \"{}\" \\; | awk '{first=\$1; \$1=\"\"; print \$0\">\"first}' | sed 's|^ |/|') | sort -u -o /tmp/onbuild/exclude.filelist.new -"
+
 #"&& ln -s ../../../lib/libturbojpeg.so.0.2.0 libturbojpeg.so"
 ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data"
 
