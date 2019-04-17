@@ -1,7 +1,7 @@
 ARG TAG="20190411"
 ARG LIBJPEGTURBO_VERSION="2.0.2"
 ARG CONTENTIMAGE1="huggla/libjpegturbo:$LIBJPEGTURBO_VERSION"
-ARG CONTENTSOURCE1="/libjpegturbo
+ARG CONTENTSOURCE1="/libjpegturbo"
 ARG CATALINA_HOME="/usr/local/tomcat"
 ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
