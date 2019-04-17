@@ -24,7 +24,6 @@ RUN apk add $BUILDDEPS \
        -DBUILD_SHARED_LIBS=True \
        -DCMAKE_BUILD_TYPE=MinSizeRel \
        -DCMAKE_C_FLAGS="$CFLAGS" \
-       -DWITH_JPEG8=1 \
        -DWITH_JAVA=1 \
  && make \
  && make -j1 install
