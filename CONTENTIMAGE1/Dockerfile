@@ -1,47 +1,35 @@
-ARG TAG="20190327"
-ARG BUILDDEPS="openjdk8 build-base autoconf automake libtool sqlite sqlite-dev linux-headers patchelf swig"
-ARG GITCLONES="https://github.com/OSGeo/proj.4 https://github.com/OSGeo/gdal"
-ARG DESTDIR="/imagefs"
-ARG _POSIX2_VERSION="199209"
-ARG JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
+ARG TAG="20190411"
+ARG DESTDIR="/libjpegturbo"
+
+FROM huggla/alpine as alpine
+
+ARG LIBJPEGTURBO_VERSION="2.0.2"
+ARG BUILDDEPS="build-base cmake nasm openjdk8"
+ARG DOWNLOAD="https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$pkgver.tar.gz"
 ARG CFLAGS="-Os -fomit-frame-pointer"
+ARG DESTDIR
 
-#--------Generic template (don't edit)--------
-FROM ${CONTENTIMAGE1:-scratch} as content1
-FROM ${CONTENTIMAGE2:-scratch} as content2
-FROM ${CONTENTIMAGE3:-scratch} as content3
-FROM ${INITIMAGE:-${BASEIMAGE:-huggla/base:$TAG}} as init
-FROM ${BUILDIMAGE:-huggla/build} as build
-FROM ${BASEIMAGE:-huggla/base:$TAG} as image
-ARG CONTENTSOURCE1
-ARG CONTENTSOURCE1="${CONTENTSOURCE1:-/}"
-ARG CONTENTDESTINATION1
-ARG CONTENTDESTINATION1="${CONTENTDESTINATION1:-/buildfs/}"
-ARG CONTENTSOURCE2
-ARG CONTENTSOURCE2="${CONTENTSOURCE2:-/}"
-ARG CONTENTDESTINATION2
-ARG CONTENTDESTINATION2="${CONTENTDESTINATION2:-/buildfs/}"
-ARG CONTENTSOURCE3
-ARG CONTENTSOURCE3="${CONTENTSOURCE3:-/}"
-ARG CONTENTDESTINATION3
-ARG CONTENTDESTINATION3="${CONTENTDESTINATION3:-/buildfs/}"
-ARG CLONEGITSDIR
-ARG DOWNLOADSDIR
-ARG MAKEDIRS
-ARG MAKEFILES
-ARG EXECUTABLES
-ARG STARTUPEXECUTABLES
-ARG EXPOSEFUNCTIONS
-ARG GID0WRITABLES
-ARG GID0WRITABLESRECURSIVE
-ARG LINUXUSEROWNED
-COPY --from=build /imagefs /
-RUN [ -n "$LINUXUSEROWNED" ] && chown 102 $LINUXUSEROWNED || true
-#---------------------------------------------
+RUN apk add $BUILDDEPS \
+ && downloadDir="$(mktemp -d)" \
+ && cd $downloadDir \
+ && wget "$DOWNLOAD" \
+ && buildDir="$(mktemp -d)" \
+ && cd $buildDir \
+ && tar -xvp -f "$downloadDir/$(basename "$DOWNLOAD")" --strip-components=1 \
+ && rm -rf "$downloadDir" \
+ && cmake \
+		   -DCMAKE_INSTALL_PREFIX=/usr \
+		   -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+		   -DBUILD_SHARED_LIBS=True \
+		   -DCMAKE_BUILD_TYPE=MinSizeRel \
+		   -DCMAKE_C_FLAGS="$CFLAGS" \
+		   -DWITH_JPEG8=1 \
+       -DWITH_JAVA=1 \
+ && make \
+ && make -j1 install
+ 
+FROM huggla/busybox:$TAG as image
+ 
+ARG DESTDIR
 
-
-#--------Generic template (don't edit)--------
-USER starter
-ONBUILD USER root
-#---------------------------------------------
-
+COPY --from=alpine $DESTDIR $DESTDIR
