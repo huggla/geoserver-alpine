@@ -17,9 +17,7 @@ RUN apk add $BUILDDEPS \
  && cd $buildDir \
  && tar -xvp -f "$downloadDir/$(basename "$DOWNLOAD")" --strip-components=1 \
  && rm -rf "$downloadDir" \
- && cmake \
-       -DCMAKE_INSTALL_PREFIX=/usr \
-       -DWITH_JAVA=1 \
+ && cmake -DCMAKE_INSTALL_PREFIX=/usr -DWITH_JAVA=1 \
  && make \
  && make install
  
