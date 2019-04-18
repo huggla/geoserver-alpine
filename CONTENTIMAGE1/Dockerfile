@@ -7,7 +7,7 @@ ARG LIBJPEGTURBO_VERSION="1.5.3"
 ARG BUILDDEPS="build-base cmake nasm openjdk8 autoconf automake libtool"
 ARG DOWNLOAD="https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEGTURBO_VERSION.tar.gz"
 ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk" \
-    Java_JAVAC_EXECUTABLE="/usr/lib/jvm/java-1.8-openjdk/bin/javac"
+    JAVAC="/usr/lib/jvm/java-1.8-openjdk/bin/javac"
 ARG DESTDIR
 
 RUN apk add $BUILDDEPS \
