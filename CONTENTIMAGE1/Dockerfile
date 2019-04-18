@@ -4,7 +4,7 @@ ARG DESTDIR="/libjpegturbo"
 FROM huggla/alpine as alpine
 
 ARG LIBJPEGTURBO_VERSION="1.5.3"
-ARG BUILDDEPS="build-base cmake nasm openjdk8 autoconf automake libtool"
+ARG BUILDDEPS="clang openjdk8 autoconf automake libtool"
 ARG DOWNLOAD="https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEGTURBO_VERSION.tar.gz"
 ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk" \
     JAVAC="/usr/lib/jvm/java-1.8-openjdk/bin/javac" \
