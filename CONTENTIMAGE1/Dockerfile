@@ -17,10 +17,8 @@ RUN apk add $BUILDDEPS \
  && cd $sourceDir \
  && tar -xvp -f "$downloadDir/$(basename "$DOWNLOAD")" --strip-components=1 \
  && rm -rf "$downloadDir" \
- && autoreconf -fiv \
- && buildDir="$(mktemp -d)" \
- && cd $buildDir
-"&& sh $sourceDir/configure --with-java \
+# && autoreconf -fiv \
+# /configure --with-java \
 #&& cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib -DWITH_JAVA=1 -DREQUIRE_SIMD=1 -DCMAKE_POSITION_INDEPENDENT_CODE=1 \
 #&& make \
 #&& make install
