@@ -1,4 +1,4 @@
-ARG TAG="20190411"
+ARG TAG="20190418"
 ARG DESTDIR="/libjpegturbo"
 
 FROM huggla/alpine as alpine
