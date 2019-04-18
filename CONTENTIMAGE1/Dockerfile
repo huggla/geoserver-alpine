@@ -6,7 +6,7 @@ FROM huggla/alpine as alpine
 ARG LIBJPEGTURBO_VERSION="1.5.3"
 ARG BUILDDEPS="build-base cmake nasm openjdk8 autoconf automake libtool"
 ARG DOWNLOAD="https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEGTURBO_VERSION.tar.gz"
-ARG JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
+ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
 ARG DESTDIR
 
 RUN apk add $BUILDDEPS \
