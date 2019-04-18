@@ -17,12 +17,12 @@ RUN apk add $BUILDDEPS \
  && cd $buildDir \
  && tar -xvp -f "$downloadDir/$(basename "$DOWNLOAD")" --strip-components=1 \
  && rm -rf "$downloadDir" \
- && cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib -DWITH_JAVA=1 -DREQUIRE_SIMD=1 -DCMAKE_POSITION_INDEPENDENT_CODE=1
-# && make tjtest
-# && make install
+ && cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib -DWITH_JAVA=1 -DREQUIRE_SIMD=1 -DCMAKE_POSITION_INDEPENDENT_CODE=1 \
+ && make \
+ && make install
  
-#FROM huggla/busybox:$TAG as image
+FROM huggla/busybox:$TAG as image
  
-#ARG DESTDIR
+ARG DESTDIR
 
-#COPY --from=alpine $DESTDIR $DESTDIR
+COPY --from=alpine $DESTDIR $DESTDIR
