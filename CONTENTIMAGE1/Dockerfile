@@ -3,13 +3,11 @@ ARG DESTDIR="/libjpegturbo"
 
 FROM huggla/alpine as alpine
 
-ARG LIBJPEGTURBO_VERSION="1.5.3"
-ARG BUILDDEPS="clang openjdk8 autoconf automake libtool"
+ARG LIBJPEGTURBO_VERSION="2.0.2"
+ARG BUILDDEPS="clang cmake nasm openjdk8"
 ARG DOWNLOAD="https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEGTURBO_VERSION.tar.gz"
-ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk" \
-    JAVAC="/usr/lib/jvm/java-1.8-openjdk/bin/javac" \
-    JAR="/usr/lib/jvm/java-1.8-openjdk/bin/jar" \
-    JNI_CFLAGS="-I/usr/lib/jvm/java-1.8-openjdk/include -I/usr/lib/jvm/java-1.8-openjdk/include/linux"
+ARG JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
+ARG CFLAGS="-Os -fomit-frame-pointer"
 ARG DESTDIR
 
 RUN apk add $BUILDDEPS \
@@ -20,11 +18,14 @@ RUN apk add $BUILDDEPS \
  && cd $buildDir \
  && tar -xvp -f "$downloadDir/$(basename "$DOWNLOAD")" --strip-components=1 \
  && rm -rf "$downloadDir" \
- && autoreconf -fiv \
- && JNI_CFLAGS='-I/usr/lib/jvm/java-1.8-openjdk/include -I/usr/lib/jvm/java-1.8-openjdk/include/linux' ./configure --prefix=/usr --with-java \
-#&& cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=/usr/lib -DWITH_JAVA=1 -DREQUIRE_SIMD=1 -DCMAKE_POSITION_INDEPENDENT_CODE=1 \
+ && cmake \
+       -DCMAKE_INSTALL_PREFIX=/usr \
+       -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+       -DCMAKE_BUILD_TYPE=MinSizeRel \
+       -DCMAKE_C_FLAGS="$CFLAGS" \
+       -DWITH_JAVA=1 \
  && make \
- && make install
+ && make -j1 install
  
 FROM huggla/busybox:$TAG as image
  
