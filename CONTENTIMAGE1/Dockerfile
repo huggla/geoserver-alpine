@@ -4,7 +4,7 @@ ARG DESTDIR="/libjpegturbo"
 FROM huggla/alpine as alpine
 
 ARG LIBJPEGTURBO_VERSION="2.0.2"
-ARG BUILDDEPS="clang cmake make nasm openjdk8"
+ARG BUILDDEPS="clang binutils cmake make nasm openjdk8"
 ARG DOWNLOAD="https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEGTURBO_VERSION.tar.gz"
 ARG JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
 ARG CFLAGS="-Os -fomit-frame-pointer"
