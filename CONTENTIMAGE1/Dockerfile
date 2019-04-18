@@ -4,7 +4,7 @@ ARG DESTDIR="/libjpegturbo"
 FROM huggla/alpine as alpine
 
 ARG LIBJPEGTURBO_VERSION="2.0.2"
-ARG BUILDDEPS="clang build-base musl-dev cmake nasm openjdk8"
+ARG BUILDDEPS="build-base cmake nasm openjdk8"
 ARG DOWNLOAD="https://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-$LIBJPEGTURBO_VERSION.tar.gz"
 ARG JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
 ARG CFLAGS="-Os -fomit-frame-pointer"
@@ -22,7 +22,6 @@ RUN apk add $BUILDDEPS \
        -DCMAKE_INSTALL_PREFIX=/usr \
        -DCMAKE_INSTALL_LIBDIR=/usr/lib \
        -DCMAKE_BUILD_TYPE=MinSizeRel \
-       -DCMAKE_C_COMPILER=clang \
        -DCMAKE_C_FLAGS="$CFLAGS" \
        -DWITH_JAVA=1 \
  && make \
