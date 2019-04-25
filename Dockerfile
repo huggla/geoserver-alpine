@@ -1,8 +1,4 @@
 ARG TAG="20190418"
-ARG LIBJPEGTURBO_VERSION="2.0.2"
-ARG CONTENTIMAGE1="huggla/libjpegturbo:$LIBJPEGTURBO_VERSION"
-ARG CONTENTSOURCE1="/libjpegturbo/usr/lib/libturbojpeg.so.0.2.0"
-ARG CONTENTDESTINATION1="/buildfs/usr/lib/libturbojpeg.so"
 ARG CATALINA_HOME="/usr/local/tomcat"
 ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
@@ -54,8 +50,7 @@ COPY --from=build /imagefs /
 
 ENV VAR_DATA_DIR="/geos-data" \
     VAR_WITH_MANAGERS="false" \
-    VAR_ROOT_APP="geoserver" \
-    VAR_CATALINA_OPTS="-Djava.awt.headless=true -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:ParallelGCThreads=4 -Dfile.encoding=UTF8 -Duser.timezone=GMT -Djavax.servlet.request.encoding=UTF-8 -Djavax.servlet.response.encoding=UTF-8 -Duser.timezone=GMT -Dorg.geotools.shapefile.datetime=true -server -Xrs -XX:PerfDataSamplingInterval=500 -Dorg.geotools.referencing.forceXY=true -XX:SoftRefLRUPolicyMSPerMB=36000 -XX:NewRatio=2 -XX:+CMSClassUnloadingEnabled"
+    VAR_ROOT_APP="geoserver"
     
 #--------Generic template (don't edit)--------
 USER starter
