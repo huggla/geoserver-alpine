@@ -49,6 +49,7 @@ COPY --from=build /imagefs /
 #---------------------------------------------
 
 ENV VAR_DATA_DIR="/geos-data" \
+    VAR_MODULES_DIR="/geos-modules" \
     VAR_WITH_MANAGERS="false" \
     VAR_ROOT_APP="geoserver"
     
