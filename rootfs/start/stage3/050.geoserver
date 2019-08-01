@@ -16,4 +16,5 @@ then
 fi
 if [ -s "$VAR_MODULES_DIR" ]
 then
-   cp -a 
+   cp -a $VAR_MODULES_DIR/* "$VAR_WEBAPPS_DIR/ROOT/WEB_INF/lib/"
+fi
