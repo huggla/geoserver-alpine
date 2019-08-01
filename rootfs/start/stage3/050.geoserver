@@ -14,3 +14,6 @@ then
    local endRow="$(expr $nameRow + 3)"
    sed -i "${startRow}d;${endRow}d" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
 fi
+if [ -s "$VAR_MODULES_DIR" ]
+then
+   cp -a 
