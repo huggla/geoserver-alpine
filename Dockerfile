@@ -1,4 +1,9 @@
-ARG TAG="20190802"
+# =========================================================================
+# Init
+# =========================================================================
+# ARGs (can be passed to Build/Final) <BEGIN>
+ARG TAG="20190902"
+ARG IMAGETYPE="application"
 ARG CATALINA_HOME="/usr/local/tomcat"
 ARG BASEIMAGE="huggla/tomcat-alpine:openjdk-$TAG"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
@@ -15,46 +20,34 @@ ARG BUILDCMDS=\
 "&& cp -a \$DOWNLOADSDIR/*.jar \$DOWNLOADSDIR/jai-1_1_3/lib/*.jar \$DOWNLOADSDIR/jai_imageio-1_1/lib/*.jar WEB-INF/lib/ "\
 "&& cp -a \$DOWNLOADSDIR/jai-1_1_3/lib/*.so \$DOWNLOADSDIR/jai_imageio-1_1/lib/*.so /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so /finalfs/usr/local/lib/amd64/"
 ARG REMOVEDIRS="$CATALINA_HOME/webapps/geoserver/data"
+# ARGs (can be passed to Build/Final) </END>
 
-#--------Generic template (don't edit)--------
+# Generic template (don't edit) <BEGIN>
 FROM ${CONTENTIMAGE1:-scratch} as content1
 FROM ${CONTENTIMAGE2:-scratch} as content2
 FROM ${CONTENTIMAGE3:-scratch} as content3
+FROM ${CONTENTIMAGE4:-scratch} as content4
 FROM ${INITIMAGE:-${BASEIMAGE:-huggla/base:$TAG}} as init
-FROM ${BUILDIMAGE:-huggla/build} as build
-FROM ${BASEIMAGE:-huggla/base:$TAG} as final
-ARG CONTENTSOURCE1
-ARG CONTENTSOURCE1="${CONTENTSOURCE1:-/}"
-ARG CONTENTDESTINATION1
-ARG CONTENTDESTINATION1="${CONTENTDESTINATION1:-/}"
-ARG CONTENTSOURCE2
-ARG CONTENTSOURCE2="${CONTENTSOURCE2:-/}"
-ARG CONTENTDESTINATION2
-ARG CONTENTDESTINATION2="${CONTENTDESTINATION2:-/}"
-ARG CONTENTSOURCE3
-ARG CONTENTSOURCE3="${CONTENTSOURCE3:-/}"
-ARG CONTENTDESTINATION3
-ARG CONTENTDESTINATION3="${CONTENTDESTINATION3:-/}"
-ARG CLONEGITSDIR
-ARG DOWNLOADSDIR
-ARG MAKEDIRS
-ARG MAKEFILES
-ARG EXECUTABLES
-ARG STARTUPEXECUTABLES
-ARG EXPOSEFUNCTIONS
-ARG GID0WRITABLES
-ARG GID0WRITABLESRECURSIVE
-ARG LINUXUSEROWNED
-ARG LINUXUSEROWNEDRECURSIVE
-COPY --from=build /finalfs /
-#---------------------------------------------
+# Generic template (don't edit) </END>
 
+# =========================================================================
+# Build
+# =========================================================================
+# Generic template (don't edit) <BEGIN>
+FROM ${BUILDIMAGE:-huggla/build:$TAG} as build
+FROM ${BASEIMAGE:-huggla/base:$TAG} as final
+COPY --from=build /finalfs /
+# Generic template (don't edit) </END>
+
+# =========================================================================
+# Final
+# =========================================================================
 ENV VAR_DATA_DIR="/geos-data" \
     VAR_MODULES_DIR="/geos-modules" \
     VAR_WITH_MANAGERS="false" \
     VAR_ROOT_APP="geoserver"
     
-#--------Generic template (don't edit)--------
+# Generic template (don't edit) <BEGIN>
 USER starter
 ONBUILD USER root
-#---------------------------------------------
+# Generic template (don't edit) </END>
