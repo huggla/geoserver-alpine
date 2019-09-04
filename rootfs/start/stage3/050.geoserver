@@ -16,5 +16,6 @@ then
 fi
 if [ ! -z "$(ls -A "$VAR_MODULES_DIR")" ]
 then
+   mkdir -p "$VAR_WEBAPPS_DIR/ROOT/WEB_INF/lib"
    cp -a $VAR_MODULES_DIR/* "$VAR_WEBAPPS_DIR/ROOT/WEB_INF/lib/"
 fi
