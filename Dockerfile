@@ -4,7 +4,7 @@
 # ARGs (can be passed to Build/Final) <BEGIN>
 ARG TAG="20190902"
 ARG IMAGETYPE="application"
-ARG GEOSERVER_VERSION="2.14.3"
+ARG GEOSERVER_VERSION="2.15.2"
 ARG CATALINA_HOME="/usr/local/tomcat"
 ARG BASEIMAGE="huggla/tomcat-alpine:$TAG"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
