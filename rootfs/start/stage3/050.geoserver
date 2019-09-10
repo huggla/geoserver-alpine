@@ -13,4 +13,9 @@ then
    local startRow="$(expr $nameRow - 2)"
    local endRow="$(expr $nameRow + 3)"
    sed -i "${startRow}d;${endRow}d" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
+   modulesDirContent="$(ls -A "$VAR_MODULES_DIR")"
+   if [ ! -z "$modulesDirContent" ] && [ "$modulesDirContent" != ".snapshot" ]
+   then
+      cp -a $VAR_MODULES_DIR/* "/usr/local/tomcat/webapps/geoserver/WEB-INF/lib/"
+   fi
 fi
