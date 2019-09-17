@@ -16,18 +16,11 @@ then
       local endRow="$(expr $nameRow + 3)"
       sed -i "${startRow}d;${endRow}d" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
    fi
-   if [ "$VAR_ROOT_APP" == "geoserver" ]
-   then
-      appDir="ROOT"
-   else
-      appDir="geoserver"
-   fi
-   if [ -n "$VAR_WEBAPPS_DIR" ] && [ -d "$VAR_WEBAPPS_DIR/$appDir/WEB-INF/lib" ]
-   then
-      linkContents="$(ls -A "$VAR_WEBAPPS_DIR/$appDir/WEB-INF/lib" | sed 's/.snapshot\>//' | xargs)"
-      if [ -z "$linkContents" ] && [ -n "$VAR_MODULES_DIR" ] && [ "$VAR_MODULES_DIR" != "$VAR_WEBAPPS_DIR/$appDir/WEB-INF/lib" ]
-      then
-         ln -fs "$VAR_MODULES_DIR" "$VAR_WEBAPPS_DIR/$appDir/WEB-INF/lib"
-      fi
-   fi
+   modulesDirContent="$(ls -A "$VAR_MODULES_DIR" | sed 's/.snapshot\>//' | xargs)"
+	   if [ ! -z "$modulesDirContent" ]
+	   then
+	      cp -a $VAR_MODULES_DIR/* "/usr/local/tomcat/webapps/geoserver/WEB-INF/lib/"
+	   fi
+      
+      
 fi
