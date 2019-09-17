@@ -13,7 +13,7 @@ then
    local startRow="$(expr $nameRow - 2)"
    local endRow="$(expr $nameRow + 3)"
    sed -i "${startRow}d;${endRow}d" '/usr/local/tomcat/webapps/geoserver/WEB-INF/web.xml'
-   if [ "$VAR_ROOT_DIR" == "geoserver" ]
+   if [ "$VAR_ROOT_APP" == "geoserver" ]
    then
       appDir="ROOT"
    else
