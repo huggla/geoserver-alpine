@@ -1,0 +1,5 @@
+modulesDirContent="$(ls -A "$VAR_MODULES_DIR" | sed 's/.snapshot\>//' | xargs)"
+if [ ! -z "$modulesDirContent" ]
+then
+   cp -a $VAR_MODULES_DIR/* "/usr/local/tomcat/webapps/geoserver/WEB-INF/lib/"
+fi
