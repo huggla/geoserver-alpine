@@ -2,7 +2,7 @@
 # Init
 # =========================================================================
 # ARGs (can be passed to Build/Final) <BEGIN>
-ARG TAG="20190911"
+ARG TAG="20190917"
 ARG IMAGETYPE="application"
 ARG GEOSERVER_VERSION="2.14.3"
 ARG CATALINA_HOME="/usr/local/tomcat"
@@ -15,7 +15,6 @@ ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOS
 ARG DESTDIR="$CATALINA_HOME/webapps/geoserver"
 ARG BUILDCMDS=\
 '   cd $DESTDIR '\
-'&& ls -la /usr/lib '\
 '&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf $DOWNLOADSDIR/geoserver.war '\
 '&& cp -a $DOWNLOADSDIR/*.jar $DOWNLOADSDIR/jai-1_1_3/lib/*.jar $DOWNLOADSDIR/jai_imageio-1_1/lib/*.jar WEB-INF/lib/ '\
 '&& cp -a $DOWNLOADSDIR/jai-1_1_3/lib/*.so $DOWNLOADSDIR/jai_imageio-1_1/lib/*.so /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so /finalfs/usr/local/lib/amd64/'
