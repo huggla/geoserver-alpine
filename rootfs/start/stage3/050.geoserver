@@ -25,8 +25,9 @@ then
    if [ -n "$VAR_WEBAPPS_DIR" ] && [ -d "$VAR_WEBAPPS_DIR/$appDir/WEB-INF/lib" ]
    then
       linkContents="$(ls -A "$VAR_WEBAPPS_DIR/$appDir/WEB-INF/lib" | sed 's/.snapshot\>//' | xargs)"
-   if [ -z "$linkContents" ]
-   if [ -n "$VAR_MODULES_DIR" ] && [ "$VAR_MODULES_DIR" != "$VAR_WEBAPPS_DIR/$appDir/WEB-INF/lib" ] && [ "$VAR_WEBAPPS_DIR/$appDir/WEB-INF/lib"
-   
-   ln -fs "$VAR_MODULES_DIR" "$VAR_WEBAPPS_DIR/$appDir/WEB-INF/lib"
+      if [ -z "$linkContents" ] && [ -n "$VAR_MODULES_DIR" ] && [ "$VAR_MODULES_DIR" != "$VAR_WEBAPPS_DIR/$appDir/WEB-INF/lib" ]
+      then
+         ln -fs "$VAR_MODULES_DIR" "$VAR_WEBAPPS_DIR/$appDir/WEB-INF/lib"
+      fi
+   fi
 fi
