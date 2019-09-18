@@ -10,9 +10,8 @@ ARG BASEIMAGE="huggla/tomcat-alpine:$TAG"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
 ARG RUNDEPS="freetype ttf-font-awesome"
 ARG BUILDDEPS="openjdk8"
-ARG MAKEDIRS="$CATALINA_HOME/webapps/geoserver"
+ARG DESTDIR="/webapps-nobind/geoserver"
 ARG DOWNLOADS="https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/geoserver-$GEOSERVER_VERSION-war.zip https://iweb.dl.sourceforge.net/project/geoserver/GeoServer/$GEOSERVER_VERSION/extensions/geoserver-$GEOSERVER_VERSION-libjpeg-turbo-plugin.zip https://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64.tar.gz https://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64.tar.gz"
-ARG DESTDIR="/geoserver"
 ARG BUILDCMDS=\
 '   cd $DESTDIR '\
 '&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xvf $DOWNLOADSDIR/geoserver.war '\
@@ -21,7 +20,6 @@ ARG BUILDCMDS=\
 '&& tar -cvpf /finalfs/geos-data.tar.gz * '\
 '&& cd .. '\
 '&& rm -r data '\
-'&& tar -cvpf /finalfs/geoserver.tar.gz * '\
 '&& cp -a $DOWNLOADSDIR/jai-1_1_3/lib/*.so $DOWNLOADSDIR/jai_imageio-1_1/lib/*.so /usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/libfontmanager.so /finalfs/usr/local/lib/amd64/'
 # ARGs (can be passed to Build/Final) </END>
 
