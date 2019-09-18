@@ -46,7 +46,7 @@ COPY --from=build /finalfs /
 # Final
 # =========================================================================
 ENV VAR_DATA_DIR="/geos-data" \
-    VAR_MODULES_DIR="/geos-modules" \
+    VAR_ADD_MODULES_DIR="/geos-modules" \
     VAR_WITH_MANAGERS="false" \
     VAR_ROOT_APP="geoserver"
     
