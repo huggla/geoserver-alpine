@@ -8,8 +8,8 @@
 if [ "$isFirstRun" == "true" ]
 then
    tryMakeDir "$VAR_WEBAPPS_DIR/geoserver"
-   appDirContents="$(ls -A "$VAR_WEBAPPS_DIR/geoserver" | sed 's/.snapshot\>//' | xargs)"
-   if [ -z "$appDirContents" ]
+   geosDirContents="$(ls -A "$VAR_WEBAPPS_DIR/geoserver" | sed 's/.snapshot//' | xargs)"
+   if [ -z "$geosDirContents" ]
    then
       cd "$VAR_WEBAPPS_DIR/geoserver"
       tar -xvpf /geoserver.tar.gz
@@ -22,12 +22,12 @@ then
       cd /
    fi
    rm /geoserver.tar.gz
-   dataDirContents="$(ls -A "$VAR_DATA_DIR" | sed 's/.snapshot\>//' | xargs)"
+   dataDirContents="$(ls -A "$VAR_DATA_DIR" | sed 's/.snapshot//' | xargs)"
    if [ -z "$dataDirContents" ]
    then
       cd "$VAR_DATA_DIR"
       tar -xvpf /geos-data.tar.gz
       cd /
    fi
-   rm /geoserver.tar.gz
+   rm /geos-data.tar.gz
 fi
