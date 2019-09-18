@@ -5,7 +5,8 @@
 # VAR_*
 # All functions in /start/functions
 
-modulesDirContent="$(ls -A "$VAR_MODULES_DIR" | sed 's/.snapshot\>//' | xargs)"
+addModDirContent="$(ls -A "$VAR_ADD_MODULES_DIR" | sed 's/.snapshot//' | xargs)"
+
 if [ ! -z "$modulesDirContent" ]
 then
    cp -a $VAR_MODULES_DIR/* "/usr/local/tomcat/webapps/geoserver/WEB-INF/lib/"
