@@ -7,21 +7,23 @@
 
 if [ "$isFirstRun" == "true" ]
 then
-   geosDirContents=""
-   rootDirContents=""
-   if [ -e "$VAR_WEBAPPS_DIR/geoserver" ]
+
+   if [ "$VAR_WEBAPPS_DIR" != "/webapps-nobind" ]
    then
-      geosDirContents="$(ls -A "$VAR_WEBAPPS_DIR/geoserver" | sed 's/.snapshot//' | xargs)"
-   fi
-   if [ "$VAR_ROOT_APP" == "geoserver" ] && [ -e "$VAR_WEBAPPS_DIR/ROOT" ]
-   then
-      rootDirContents="$(ls -A "$VAR_WEBAPPS_DIR/ROOT" | sed 's/.snapshot//' | xargs)"
-   fi
-   if [ -z "$geosDirContents" ] && [ -z "$rootDirContents" ]
-   then
-      tryMakeDir "$VAR_WEBAPPS_DIR/geoserver"
-      cd "$VAR_WEBAPPS_DIR/geoserver"
-      tar -xvpf /geoserver.tar.gz
+      geosDirContents=""
+      rootDirContents=""
+      if [ -e "$VAR_WEBAPPS_DIR/geoserver" ]
+      then
+         geosDirContents="$(ls -A "$VAR_WEBAPPS_DIR/geoserver" | sed 's/.snapshot//' | xargs)"
+      fi
+      if [ "$VAR_ROOT_APP" == "geoserver" ] && [ -e "$VAR_WEBAPPS_DIR/ROOT" ]
+      then
+         rootDirContents="$(ls -A "$VAR_WEBAPPS_DIR/ROOT" | sed 's/.snapshot//' | xargs)"
+      fi
+      if [ -z "$geosDirContents" ] && [ -z "$rootDirContents" ]
+      then
+         cp -a "/webapps-nobind/geoserver" "$VAR_WEBAPPS_DIR/"
+      fi
       local nameRow="$(sed -n '/GEOSERVER_DATA_DIR/{=;q;}' 'WEB-INF/web.xml')"
       local valueRow="$(expr $nameRow + 1)"
       sed -i "${valueRow}s|>.*<|>$VAR_DATA_DIR<|" 'WEB-INF/web.xml'
