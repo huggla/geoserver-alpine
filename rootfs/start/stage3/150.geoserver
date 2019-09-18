@@ -34,7 +34,7 @@ then
    if [ -z "$dataDirContents" ]
    then
       cd "$VAR_DATA_DIR"
-      tar -xvpf /geos-data.tar.gz
+      tar -xpf /geos-data.tar.gz
       cd /
    fi
    rm /geos-data.tar.gz
