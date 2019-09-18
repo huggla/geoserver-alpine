@@ -9,7 +9,6 @@ if [ "$isFirstRun" == "true" ]
 then
    geosDirContents=""
    rootDirContents=""
-   addModDirContent="$(ls -A "$VAR_ADD_MODULES_DIR" | sed 's/.snapshot//' | xargs)"
    if [ -e "$VAR_WEBAPPS_DIR/geoserver" ]
    then
       geosDirContents="$(ls -A "$VAR_WEBAPPS_DIR/geoserver" | sed 's/.snapshot//' | xargs)"
@@ -18,7 +17,6 @@ then
    then
       rootDirContents="$(ls -A "$VAR_WEBAPPS_DIR/ROOT" | sed 's/.snapshot//' | xargs)"
    fi
-   
    if [ -z "$geosDirContents" ] && [ -z "$rootDirContents" ]
    then
       tryMakeDir "$VAR_WEBAPPS_DIR/geoserver"
@@ -33,15 +31,6 @@ then
       cd /
    fi
    rm /geoserver.tar.gz
-   if [ ! -z "$addModDirContent" ]
-   then
-      if [ -e "$VAR_WEBAPPS_DIR/geoserver/WEB-INF/lib" ]
-      then
-         modDir="$VAR_WEBAPPS_DIR/geoserver/WEB-INF/lib"
-      fi
-      if 
-      cp -a $VAR_MODULES_DIR/* "/usr/local/tomcat/webapps/geoserver/WEB-INF/lib/"
-   fi
    dataDirContents="$(ls -A "$VAR_DATA_DIR" | sed 's/.snapshot//' | xargs)"
    if [ -z "$dataDirContents" ]
    then
