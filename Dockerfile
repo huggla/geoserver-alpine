@@ -2,7 +2,7 @@
 # Init
 # =========================================================================
 # ARGs (can be passed to Build/Final) <BEGIN>
-ARG TAG="20190917"
+ARG TAG="20190919"
 ARG IMAGETYPE="application"
 ARG GEOSERVER_VERSION="2.15.2"
 ARG CATALINA_HOME="/usr/local/tomcat"
