@@ -17,7 +17,7 @@ ARG BUILDCMDS=\
 '&& /usr/lib/jvm/java-1.8-openjdk/bin/jar xf $DOWNLOADSDIR/geoserver.war '\
 '&& cp -a $DOWNLOADSDIR/*.jar $DOWNLOADSDIR/jai-1_1_3/lib/*.jar $DOWNLOADSDIR/jai_imageio-1_1/lib/*.jar WEB-INF/lib/ '\
 '&& cd data '\
-'&& rm -rf coverages data demo gwc gwc-layers layergroups www workspaces README.rst '\
+'&& rm -rf coverages/* data/* demo gwc/* gwc-layers/* layergroups/* www/* workspaces/* README.rst '\
 '&& tar -cvpf /finalfs/geos-data.tar.gz * '\
 '&& cd .. '\
 '&& rm -r data '\
