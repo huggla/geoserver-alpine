@@ -2,11 +2,13 @@
 # Init
 # =========================================================================
 # ARGs (can be passed to Build/Final) <BEGIN>
-ARG TAG="20190925"
+ARG SaM_VERSION="1.1-edge"
+ARG TAG="20191112"
 ARG IMAGETYPE="application"
-ARG GEOSERVER_VERSION="2.15.2"
+ARG GEOSERVER_VERSION="2.16.0"
+ARG TOMCAT_VERSION="9.0.20"
 ARG CATALINA_HOME="/usr/local/tomcat"
-ARG BASEIMAGE="huggla/tomcat-alpine:$TAG"
+ARG BASEIMAGE="huggla/tomcat-alpine:$TOMCAT_VERSION-$TAG"
 ARG ADDREPOS="http://dl-cdn.alpinelinux.org/alpine/edge/testing"
 ARG RUNDEPS="freetype ttf-font-awesome"
 ARG BUILDDEPS="openjdk8"
@@ -29,15 +31,16 @@ FROM ${CONTENTIMAGE1:-scratch} as content1
 FROM ${CONTENTIMAGE2:-scratch} as content2
 FROM ${CONTENTIMAGE3:-scratch} as content3
 FROM ${CONTENTIMAGE4:-scratch} as content4
-FROM ${INITIMAGE:-${BASEIMAGE:-huggla/base:$TAG}} as init
+FROM ${CONTENTIMAGE5:-scratch} as content5
+FROM ${INITIMAGE:-${BASEIMAGE:-huggla/sam_$SaM_VERSION:base-$TAG}} as init
 # Generic template (don't edit) </END>
 
 # =========================================================================
 # Build
 # =========================================================================
 # Generic template (don't edit) <BEGIN>
-FROM ${BUILDIMAGE:-huggla/build:$TAG} as build
-FROM ${BASEIMAGE:-huggla/base:$TAG} as final
+FROM ${BUILDIMAGE:-huggla/sam_$SaM_VERSION:build-$TAG} as build
+FROM ${BASEIMAGE:-huggla/sam_$SaM_VERSION:base-$TAG} as final
 COPY --from=build /finalfs /
 # Generic template (don't edit) </END>
 
